@@ -1,0 +1,53 @@
+AppBundle\Entity\Grupos:
+    type: entity
+    table: grupos
+    uniqueConstraints:
+        idGrupos_UNIQUE:
+            columns:
+                - idGrupos
+    id:
+        idgrupos:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idGrupos
+            generator:
+                strategy: IDENTITY
+    fields:
+        nomegrupo:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: nomeGrupo
+        nomeresponsavel:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: nomeResponsavel
+        emailresponsavel:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: emailResponsavel
+        telefoneresponsavel:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: telefoneResponsavel
+        numerointegrantes:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: numeroIntegrantes
+    lifecycleCallbacks: {  }

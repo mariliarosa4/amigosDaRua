@@ -1,0 +1,71 @@
+AppBundle\Entity\Precadastro:
+    type: entity
+    table: precadastro
+    indexes:
+        fk_preCadastro_Grupos1_idx:
+            columns:
+                - Grupos_idGrupos
+    uniqueConstraints:
+        idpreCadastro_UNIQUE:
+            columns:
+                - idpreCadastro
+    id:
+        idprecadastro:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idpreCadastro
+            generator:
+                strategy: IDENTITY
+    fields:
+        email:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        codigovalidacao:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: codigoValidacao
+        datavalidade:
+            type: date
+            nullable: false
+            column: dataValidade
+        flvalidado:
+            type: string
+            nullable: false
+            length: 1
+            options:
+                fixed: true
+            column: flValidado
+        nomeresponsavel:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+            column: nomeResponsavel
+        senha:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+    manyToOne:
+        gruposgrupos:
+            targetEntity: Grupos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Grupos_idGrupos:
+                    referencedColumnName: idGrupos
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

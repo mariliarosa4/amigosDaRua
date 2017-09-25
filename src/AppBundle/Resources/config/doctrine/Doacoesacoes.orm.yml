@@ -1,0 +1,46 @@
+AppBundle\Entity\Doacoesacoes:
+    type: entity
+    table: doacoesacoes
+    indexes:
+        fk_ItensAtividades_Atividades1_idx:
+            columns:
+                - idAcao
+        fk_ItensAtividades_CategoriasItens1_idx:
+            columns:
+                - idCategoriasDoacao
+    uniqueConstraints:
+        idItensAtividades_UNIQUE:
+            columns:
+                - idDoacaoAcao
+    id:
+        iddoacaoacao:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idDoacaoAcao
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        idacao:
+            targetEntity: Acoes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idAcao:
+                    referencedColumnName: idAcao
+            orphanRemoval: false
+        idcategoriasdoacao:
+            targetEntity: Categoriasdoacoes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idCategoriasDoacao:
+                    referencedColumnName: idCategoriasItens
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
