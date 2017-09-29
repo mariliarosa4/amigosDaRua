@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <meta charset="UTF-8"/>
-      <title>Login</title>
+        <meta charset="UTF-8"/>
+        <title>Login</title>
 
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css">
-      <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      <link rel="stylesheet" type = "text/css" href="../../../web/assets/css/login.css">
+        <link rel="stylesheet" type = "text/css" href="../assets/css/login.css">
     </head>
     <body>
-      <div class="coluna">
-        <div class="divLogo">
-          <img src="../../../web/assets/img/Design.png">
-        </div>
-        <div class="divEmail">
-          <form action="#">
-            <i class="material-icons" >email</i>
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="email" id="email">
-              <label class="mdl-textfield__label" for="email">E-mail</label>
+        <div class="coluna">
+            <div class="divLogo">
+                <img src="../assets/img/Design.png">
             </div>
-          </form>
-        </div>
-        <div class="divSenha">
-          <form action="#">
-            <i class="material-icons">lock</i>
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="password" id="senha">
-              <label class="mdl-textfield__label" for="senha">Senha</label>
+            <div class="divEmail">
+                {{ form_start(form) }}
+                    <i class="material-icons" >email</i>
+                    <div class="mdl-textfield mdl-js-textfield">
+
+                        {{form_row(form.emailusuario, { 'attr' : { 'placeholder' : 'email'   }})}}
+                      
+                    </div>
+                <!-- isso aqui é mt ruim finalizar um form e dps começar outro embaixo tem q ser um só-->
+           
+           
+                
+                    <i class="material-icons">lock</i>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        {{form_row(form.senhausuario, { 'attr' : { 'placeholder' : 'senha'   }})}}
+                       
+                    </div>
+                        <div class="row">
+                      <input  id="botaoSubmit" type="submit" value="ENTRAR">
+                  </div>
+         
+                    {{ form_end(form) }}
+                </div>
             </div>
-          </form>
+                  
         </div>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton">
-          Entrar
-        </button>
-      </div>
     </body>
 </html>
