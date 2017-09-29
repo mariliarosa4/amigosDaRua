@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: amigosdaruadb
+    database_user: root
+    database_password: null
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_user: appamigosdarua
+    mailer_password: amigosdarua
+    secret: cf1b33611d10ef1243300d344a17ad9fa44b7222

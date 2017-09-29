@@ -29,7 +29,7 @@ class LoginController extends Controller {
      * @Route("/login", name="login")
      */
     public function login(Request $request) {
-       if ($this->get('session')->get('idUser')) {
+        if ($this->get('session')->get('idUser')) {
 
             return $this->redirectToRoute('home');
         } else {
@@ -55,12 +55,11 @@ class LoginController extends Controller {
         return $this->render('login.html.twig', array(
                     'form' => $this->formUserLogin->createView(), 'erro' => $this->error
         ));
-    
     }
 
     public function autenticacao($email, $senha) {
 
-       // $senha = hash('sha256', $senha);
+        // $senha = hash('sha256', $senha);
         $usuarioAutenticado = $this->getDoctrine()
                 ->getRepository('AppBundle:Usuarios')
                 ->findBy(array('emailusuario' => $email, 'senhausuario' => $senha));
@@ -70,12 +69,11 @@ class LoginController extends Controller {
             $this->error = "Usuário ou senha inválidos!";
             return false;
         } else {
-           
-                $idUser = $usuarioAutenticado[0]->getIdusuario();
-                $this->get('session')->set('idUser', $idUser);
 
-                return true;
-           
+            $idUser = $usuarioAutenticado[0]->getIdusuario();
+            $this->get('session')->set('idUser', $idUser);
+
+            return true;
         }
     }
 
@@ -86,6 +84,33 @@ class LoginController extends Controller {
 
         $this->get('session')->invalidate();
         return $this->redirectToRoute('login');
+    }
+     /**
+     * @Route("/esqueceuSenha")
+     */
+public function esqueceuSenha(){
+    $dtNascimento = "04/12/1996";
+    $email = "mariliarosilva@gmail.com";
+    $nome = "marilia";
+           
+    $this->enviarEmailEsquecerSenha($dtNascimento, $email, $nome);
+       return $this->render('base.html.twig');
+}
+    public function enviarEmailEsquecerSenha($dtNascimento, $email,$nome) {
+      $criptografia= hash('sha256',$dtNascimento.'amigosapp'.$email);
+    
+        $message = (new \Swift_Message('Redefinir senha'))
+                ->setFrom('appamigosdarua@gmail.com')
+                ->setTo('mariliarosilva@gmail.com')
+                ->setBody(
+                $this->renderView(
+                        'Emails/email.html.twig', array('criptografia' => $criptografia, "nome"=>$nome, "email"=>$email)
+                ), 'text/html'
+                )
+
+        ;
+
+        $this->get('mailer')->send($message);
     }
 
 }
