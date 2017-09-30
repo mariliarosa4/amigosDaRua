@@ -1,0 +1,59 @@
+html, body{
+  width: 100%;
+}
+/*.coluna{
+  width: 70%;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+}*/
+
+.material-icons{
+  position: relative;
+  top: 10px;
+  margin-right: 10px;
+}
+
+/*#submitButton{
+  margin-top: 15px;
+}*/
+/*
+@media (max-width:500px) {
+  .coluna{
+    width: 100%;
+    padding-left: 15px;
+  }
+  .divLogo img{
+    max-width: 90%;
+  }
+  .mdl-textfield, .mdl-js-textfield{
+    width: 80%;
+  }
+}
+@media (max-width:350px) {
+  .mdl-textfield, .mdl-js-textfield{
+    width: 70%;
+  }
+  .coluna{
+    padding-left: 15px;
+  }
+}*/
+
+.colunaCentro{
+  border: dashed pink 1px;
+  margin:auto;
+}
+#inputData, #inputHora{
+  width: 35%;
+}
+
+.demo-card-wide.mdl-card {
+  width: 512px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}

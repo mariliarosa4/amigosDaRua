@@ -10,34 +10,73 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
       <link rel="stylesheet" type = "text/css" href="../../../web/assets/css/login.css">
     </head>
     <body>
       <div class="coluna">
-        <div class="divLogo">
-          <img src="../../../web/assets/img/Design.png">
+          <div class="divLogo">
+            <img src="../../../web/assets/img/Design.png">
+          </div>
+          <div id="login">
+          <div class="divEmail">
+            <form action="#">
+              <i class="material-icons" >email</i>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="email" id="email">
+                <label class="mdl-textfield__label" for="email">E-mail</label>
+              </div>
+            </form>
+          </div>
+          <div class="divSenha">
+            <form action="#">
+              <i class="material-icons">lock</i>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="password" id="senha">
+                <label class="mdl-textfield__label" for="senha">Senha</label>
+              </div>
+            </form>
+          </div>
+          <br><a href="#" class="esqueciSenha" onclick="switchMenu()">Esqueceu a senha?</a><br>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton">
+            Entrar
+          </button>
         </div>
-        <div class="divEmail">
-          <form action="#">
-            <i class="material-icons" >email</i>
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="email" id="email">
-              <label class="mdl-textfield__label" for="email">E-mail</label>
-            </div>
-          </form>
+
+        <div id="recuperarSenha">
+          <i class="material-icons"  onclick="switchMenu()" style="cursor:pointer">arrow_back</i><br>
+          <div class="textoRecuperarSenha">Digite seu e-mail e enviaremos uma nova senha para acesso.</div>
+          <div class="divEmail">
+            <form action="#">
+              <i class="material-icons">email</i>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="email" id="email">
+                <label class="mdl-textfield__label" for="email">E-mail</label>
+              </div>
+            </form>
+          </div>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton">
+            Enviar
+          </button>
         </div>
-        <div class="divSenha">
-          <form action="#">
-            <i class="material-icons">lock</i>
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="password" id="senha">
-              <label class="mdl-textfield__label" for="senha">Senha</label>
-            </div>
-          </form>
-        </div>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton">
-          Entrar
-        </button>
       </div>
     </body>
 </html>
+<script>
+  function switchMenu(){
+    var login = document.getElementById('login');
+    var rSenha = document.getElementById('recuperarSenha');
+    if($(login).is(":visible")){
+      login.style.visibility="hiden";
+      login.style.display="none";
+      rSenha.style.visibility="visible";
+      rSenha.style.display="block";
+    }else {
+      rSenha.style.visibility="hiden";
+      rSenha.style.display="none";
+      login.style.visibility="visible";
+      login.style.display="block";
+    }
+  }
+</script>
