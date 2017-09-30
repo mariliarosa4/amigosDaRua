@@ -110,4 +110,3 @@ class Categoriasdoacoes
         return $this->outro;
     }
 }
-
