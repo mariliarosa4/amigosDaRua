@@ -17,12 +17,12 @@ html, body{
 .divLogo img{
   max-width: 100%;
 }
-.divEmail, .divSenha{
+.divEmail, .divSenha, .divCodigo{
   width: 100%;
   height: 10vh;
   margin: auto;
 }
-.divEmail form, .divSenha form{
+.divEmail form, .divSenha form, .divCodigo form{
   max-width: 100%;
   font-size:10vw;
 }

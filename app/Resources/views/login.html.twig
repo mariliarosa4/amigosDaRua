@@ -13,7 +13,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
       <link rel="stylesheet" type = "text/css" href="../../../web/assets/css/login.css">
-        <link rel="stylesheet" type = "text/css" href="../assets/css/login.css">
+      <link rel="stylesheet" type = "text/css" href="../assets/css/login.css">
     </head>
     <body>
       <div class="coluna">
@@ -21,28 +21,25 @@
             <img src="../../../web/assets/img/Design.png">
           </div>
           <div id="login">
-          <div class="divEmail">
-            <form action="#">
-              <i class="material-icons" >email</i>
-              <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="email" id="email">
-                <label class="mdl-textfield__label" for="email">E-mail</label>
+            {{ form_start(form) }}
+              <div class="divEmail">
+                <i class="material-icons" >email</i>
+                <div class="mdl-textfield mdl-js-textfield">
+                  {{form_row(form.emailusuario, { 'attr' : { 'placeholder' : 'E-mail', 'class' : 'mdl-textfield__input', 'id' : 'email'  }})}}
+                  <label class="mdl-textfield__label" for="email">E-mail</label>
+                </div>
               </div>
-            </form>
-          </div>
-          <div class="divSenha">
-            <form action="#">
-              <i class="material-icons">lock</i>
-              <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="password" id="senha">
-                <label class="mdl-textfield__label" for="senha">Senha</label>
+              <div class="divSenha">
+                  <i class="material-icons">lock</i>
+                  <div class="mdl-textfield mdl-js-textfield">
+                    {{form_row(form.senhausuario, { 'attr' : { 'placeholder' : 'senha', 'class' : 'mdl-textfield__input', 'id' : 'senha'  }})}}
+                    <label class="mdl-textfield__label" for="senha">Senha</label>
+                  </div>
               </div>
-            </form>
-          </div>
-          <br><a href="#" class="esqueciSenha" onclick="switchMenu()">Esqueceu a senha?</a><br>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton">
-            Entrar
-          </button>
+              <br><a href="#" class="esqueciSenha" onclick="switchMenuSenha()">Esqueceu a senha?</a><br>
+              <br><a href="#" class="esqueciSenha" onclick="switchMenuPrimeiro()">Primeiro acesso</a><br>
+              <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Entrar">
+          {{ form_end(form) }}
         </div>
 
         <div id="recuperarSenha">
@@ -57,45 +54,34 @@
               </div>
             </form>
           </div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton">
-            Enviar
-          </button>
+          <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Enviar">
+        </div>
+
+          <div id="primeiroAcesso">
+            <i class="material-icons"  onclick="switchMenuPrimeiro()" style="cursor:pointer">arrow_back</i><br>
+            {{ form_start(form) }}
+              <div class="divEmail">
+                <i class="material-icons" >email</i>
+                <div class="mdl-textfield mdl-js-textfield">
+                  {{form_row(form.emailusuario, { 'attr' : { 'placeholder' : 'E-mail', 'class' : 'mdl-textfield__input', 'id' : 'email'  }})}}
+                  <label class="mdl-textfield__label" for="email">E-mail</label>
+                </div>
+              </div>
+              <div class="divCodigo">
+                <i class="material-icons">lock</i>
+                <div class="mdl-textfield mdl-js-textfield">
+                  {{form_row(form.senhausuario, { 'attr' : { 'placeholder' : 'senha', 'class' : 'mdl-textfield__input', 'id' : 'senha'  }})}}
+                  <label class="mdl-textfield__label" for="senha">Senha</label>
+                </div>
+              </div>
+              <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Entrar">
+          {{ form_end(form) }}
         </div>
       </div>
-        <div class="coluna">
-            <div class="divLogo">
-                <img src="../assets/img/Design.png">
-            </div>
-            <div class="divEmail">
-                {{ form_start(form) }}
-                    <i class="material-icons" >email</i>
-                    <div class="mdl-textfield mdl-js-textfield">
-
-                        {{form_row(form.emailusuario, { 'attr' : { 'placeholder' : 'email'   }})}}
-                      
-                    </div>
-                <!-- isso aqui é mt ruim finalizar um form e dps começar outro embaixo tem q ser um só-->
-           
-           
-                
-                    <i class="material-icons">lock</i>
-                    <div class="mdl-textfield mdl-js-textfield">
-                        {{form_row(form.senhausuario, { 'attr' : { 'placeholder' : 'senha'   }})}}
-                       
-                    </div>
-                        <div class="row">
-                      <input  id="botaoSubmit" type="submit" value="ENTRAR">
-                  </div>
-         
-                    {{ form_end(form) }}
-                </div>
-            </div>
-                  
-        </div>
     </body>
 </html>
 <script>
-  function switchMenu(){
+  function switchMenuSenha(){
     var login = document.getElementById('login');
     var rSenha = document.getElementById('recuperarSenha');
     if($(login).is(":visible")){
@@ -106,6 +92,21 @@
     }else {
       rSenha.style.visibility="hiden";
       rSenha.style.display="none";
+      login.style.visibility="visible";
+      login.style.display="block";
+    }
+  }
+  function switchMenuPrimeiro(){
+    var login = document.getElementById('login');
+    var pAcesso = document.getElementById('primeiroAcesso');
+    if($(login).is(":visible")){
+      login.style.visibility="hiden";
+      login.style.display="none";
+      pAcesso.style.visibility="visible";
+      pAcesso.style.display="block";
+    }else {
+      pAcesso.style.visibility="hiden";
+      pAcesso.style.display="none";
       login.style.visibility="visible";
       login.style.display="block";
     }
