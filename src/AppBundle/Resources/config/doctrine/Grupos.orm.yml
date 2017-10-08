@@ -1,6 +1,10 @@
 AppBundle\Entity\Grupos:
     type: entity
     table: grupos
+    indexes:
+        fk_Grupos_Usuarios1_idx:
+            columns:
+                - idUsuario
     uniqueConstraints:
         idGrupos_UNIQUE:
             columns:
@@ -18,28 +22,14 @@ AppBundle\Entity\Grupos:
     fields:
         nomegrupo:
             type: string
-            nullable: true
+            nullable: false
             length: 45
             options:
                 fixed: false
             column: nomeGrupo
-        nomeresponsavel:
-            type: string
-            nullable: true
-            length: 45
-            options:
-                fixed: false
-            column: nomeResponsavel
-        emailresponsavel:
-            type: string
-            nullable: true
-            length: 45
-            options:
-                fixed: false
-            column: emailResponsavel
         telefoneresponsavel:
             type: string
-            nullable: true
+            nullable: false
             length: 45
             options:
                 fixed: false
@@ -50,4 +40,26 @@ AppBundle\Entity\Grupos:
             options:
                 unsigned: false
             column: numeroIntegrantes
+        codigoprimeiroacesso:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+            column: codigoPrimeiroAcesso
+        dataprimeiroacesso:
+            type: datetime
+            nullable: true
+            column: dataPrimeiroAcesso
+    manyToOne:
+        idusuario:
+            targetEntity: Usuarios
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idUsuario:
+                    referencedColumnName: idUsuario
+            orphanRemoval: false
     lifecycleCallbacks: {  }

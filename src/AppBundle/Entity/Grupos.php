@@ -167,4 +167,91 @@ class Grupos
     {
         return $this->numerointegrantes;
     }
+    /**
+     * @var string
+     */
+    private $codigoprimeiroacesso;
+
+    /**
+     * @var \DateTime
+     */
+    private $dataprimeiroacesso;
+
+    /**
+     * @var \AppBundle\Entity\Usuarios
+     */
+    private $idusuario;
+
+
+    /**
+     * Set codigoprimeiroacesso
+     *
+     * @param string $codigoprimeiroacesso
+     *
+     * @return Grupos
+     */
+    public function setCodigoprimeiroacesso($codigoprimeiroacesso)
+    {
+        $this->codigoprimeiroacesso = $codigoprimeiroacesso;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoprimeiroacesso
+     *
+     * @return string
+     */
+    public function getCodigoprimeiroacesso()
+    {
+        return $this->codigoprimeiroacesso;
+    }
+
+    /**
+     * Set dataprimeiroacesso
+     *
+     * @param \DateTime $dataprimeiroacesso
+     *
+     * @return Grupos
+     */
+    public function setDataprimeiroacesso($dataprimeiroacesso)
+    {
+        $this->dataprimeiroacesso = $dataprimeiroacesso;
+
+        return $this;
+    }
+
+    /**
+     * Get dataprimeiroacesso
+     *
+     * @return \DateTime
+     */
+    public function getDataprimeiroacesso()
+    {
+        return $this->dataprimeiroacesso;
+    }
+
+    /**
+     * Set idusuario
+     *
+     * @param \AppBundle\Entity\Usuarios $idusuario
+     *
+     * @return Grupos
+     */
+    public function setIdusuario(\AppBundle\Entity\Usuarios $idusuario = null)
+    {
+        $this->idusuario = $idusuario;
+
+        return $this;
+    }
+
+    /**
+     * Get idusuario
+     *
+     * @return \AppBundle\Entity\Usuarios
+     */
+    public function getIdusuario()
+    {
+        return $this->idusuario;
+    }
 }

@@ -14,14 +14,14 @@ AppBundle\Entity\Usuarios:
     fields:
         nmusuario:
             type: string
-            nullable: true
+            nullable: false
             length: 45
             options:
                 fixed: false
             column: nmUsuario
         emailusuario:
             type: string
-            nullable: true
+            nullable: false
             length: 45
             options:
                 fixed: false

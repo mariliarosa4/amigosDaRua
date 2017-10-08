@@ -191,12 +191,12 @@ class LoginController extends Controller {
             $this->logControle->log("nova senha : " . print_r($data, true));
 
             $this->em = $this->getDoctrine()->resetManager();
-        
+
             $objetoUsuario = $this->em->getRepository('AppBundle:Usuarios')
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-                 $objetoUsuario->getSenhausuario($data['novasenha']);
+                $objetoUsuario->getSenhausuario($data['novasenha']);
                 $this->em->flush();
             }
 
@@ -209,7 +209,58 @@ class LoginController extends Controller {
             );
         }
         return new JsonResponse($retornoRequest);
-        return $this->redirectToRoute('login');
+        // return $this->redirectToRoute('login');
+    }
+
+    /**
+     * @Route("/primeiroacesso")
+     */
+    public function primeiroacesso(Request $request) {
+        $this->em = $this->getDoctrine()->getManager();
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+
+            $this->logControle->log("primeiro acesso: " . print_r($data, true));
+
+            $this->em = $this->getDoctrine()->resetManager();
+
+            $queryBuilderPrimeiro = $this->em->createQueryBuilder();
+            $queryBuilderPrimeiro
+                    ->select('u,g')
+                    ->from('AppBundle:Grupos', 'g')
+                    ->innerJoin('g.idusuario', 'u', 'WITH', 'u.idusuario= g.idusuario')
+                    ->where($queryBuilderPrimeiro->expr()->eq('u.emailusuario', "'" . $data['email'] . "'"))
+                    ->andWhere($queryBuilderPrimeiro->expr()->eq('g.codigoprimeiroacesso', "'" . $data['codigo'] . "'"))
+                    ->andWhere($queryBuilderPrimeiro->expr()->eq('u.tpusuario', "'G'"))
+                    ->getQuery()
+                    ->execute();
+            $dadosPrimeiroAcesso = $queryBuilderPrimeiro->getQuery()->getArrayResult();
+
+            $this->logControle->log(print_r($dadosPrimeiroAcesso, true));
+            if (count($dadosPrimeiroAcesso) > 0) {
+                $objetoGrupo = $this->em->getRepository('AppBundle:Grupos')
+                        ->findOneBy(array('idgrupos' => $dadosPrimeiroAcesso[0]['idgrupos']));
+                $this->logControle->log(print_r($objetoGrupo, true));
+                if ($objetoGrupo != null) {
+                    $date = new \DateTime();
+                   
+                    $objetoGrupo->setDataprimeiroacesso($date);
+                    $this->em->flush();
+                }
+
+                $retornoRequest = array(
+                    "sucesso" => true
+                );
+                // return $this->redirectToRoute('editarPerfil');
+            } else {
+                $retornoRequest = array(
+                    "sucesso" => false
+                );
+                //tratar para codigo incorreto
+            }
+        }
+        return new JsonResponse($retornoRequest);
     }
 
     /**
