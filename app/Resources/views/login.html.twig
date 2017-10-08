@@ -14,6 +14,7 @@
 
       <link rel="stylesheet" type = "text/css" href="../../../web/assets/css/login.css">
       <link rel="stylesheet" type = "text/css" href="../assets/css/login.css">
+      <script src="../assets/js/login.js"></script>
     </head>
     <body>
       <div class="coluna">
@@ -49,12 +50,12 @@
             <form action="#">
               <i class="material-icons">email</i>
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="email" id="email">
+                <input class="mdl-textfield__input" type="email"   id="email">
                 <label class="mdl-textfield__label" for="email">E-mail</label>
               </div>
             </form>
           </div>
-          <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Enviar">
+          <input  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Enviar" onclick='esquecerSenha("{{web_dir}}");'>
         </div>
 
           <div id="primeiroAcesso">

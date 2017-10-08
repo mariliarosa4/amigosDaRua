@@ -37,7 +37,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-
+    globals:
+        web_dir: "/amigosDaRua/app_dev.php/"
 # Doctrine Configuration
 doctrine:
     dbal:
