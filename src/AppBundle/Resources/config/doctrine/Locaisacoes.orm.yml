@@ -1,0 +1,52 @@
+AppBundle\Entity\Locaisacoes:
+    type: entity
+    table: locaisacoes
+    indexes:
+        fk_LocaisAtividades_Atividades_idx:
+            columns:
+                - idAcao
+    uniqueConstraints:
+        idLocaisAtividades_UNIQUE:
+            columns:
+                - idLocaisAcoes
+    id:
+        idlocaisacoes:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idLocaisAcoes
+            generator:
+                strategy: IDENTITY
+    fields:
+        endereco:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+        latitude:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+        longitude:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+    manyToOne:
+        idacao:
+            targetEntity: Acoes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idAcao:
+                    referencedColumnName: idAcao
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
