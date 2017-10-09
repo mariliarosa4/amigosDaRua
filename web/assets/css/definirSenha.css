@@ -1,0 +1,63 @@
+html, body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.coluna{
+  width: 70%;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.divLogo{
+  width: 100%;
+  height: 50vh;
+}
+.divLogo img{
+  max-width: 100%;
+}
+.divSenha, .divConfirmarSenha{
+  width: 100%;
+  height: 10vh;
+  margin: auto;
+}
+.divSenha form, .divConfirmarSenha form{
+  max-width: 100%;
+  font-size:10vw;
+}
+
+.material-icons{
+  position: relative;
+  top: 10px;
+  margin-right: 5px;
+}
+
+#submitButton{
+  margin-top: 30px;
+}
+.textoDefinirSenha{
+  font-size: medium;
+  color: #777;
+  margin-top:30px;
+}
+@media (max-width:500px) {
+  .coluna{
+    width: 100%;
+    padding-left: 15px;
+  }
+  .divLogo img{
+    max-width: 90%;
+  }
+  .mdl-textfield, .mdl-js-textfield{
+    width: 80%;
+  }
+}
+@media (max-width:350px) {
+  .mdl-textfield, .mdl-js-textfield{
+    width: 70%;
+  }
+  .coluna{
+    padding-left: 15px;
+  }
+}
