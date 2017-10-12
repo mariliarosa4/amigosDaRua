@@ -25,6 +25,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class LoginController extends Controller {
 
     public $formUserLogin;
+    public $formAlterarSenha;
     public $error = null;
     public $codigo = 'amigosapp';
     public $logControle;
@@ -149,7 +150,7 @@ class LoginController extends Controller {
     /**
      * @Route("/change/{email}/{criptografia}")
      */
-    public function alterarSenha($email, $criptografia) {
+    public function alterarSenha($email, $criptografia, Request $request) {
         $stringDescriptografada = base64_decode($criptografia);
         $arrayString = (explode("/", $stringDescriptografada));
         $this->logControle->log(print_r($arrayString, true));
@@ -170,7 +171,25 @@ class LoginController extends Controller {
             } else {
                 if ($validarUusario[0]->getDtnascimento()->format('Y-m-d') == $dtNascimento) {
                     $this->logControle->log("valido");
-                    return $this->render('base.html.twig'); //pagina para inserir nova senha
+                    $user = new Usuarios();
+                    $this->formAlterarSenha = $this->createFormBuilder()
+                            ->add('senhausuario', PasswordType::class, array('label' => false))
+                            ->add('senhausuarioRepetido', PasswordType::class, array('label' => false))
+                            ->getForm();
+                    $this->formAlterarSenha->handleRequest($request);
+
+                    if ($this->formAlterarSenha->isSubmitted() && $this->formAlterarSenha->isValid()) {
+                        if ($this->autenticacao($user->getEmailusuario(), $user->getSenhausuario())) {
+                            return $this->redirectToRoute('home');
+                        } else {
+                            return $this->render('definirSenha.html.twig', array(
+                                        'form' => $this->formUserLogin->createView(), 'erro' => $this->error
+                            ));
+                        }
+                    }
+                    return $this->render('definirSenha.html.twig', array(
+                                'form' => $this->formAlterarSenha->createView()
+                    ));
                 } else {
                     $this->logControle->log("invalido");
                     return $this->redirectToRoute('login');
@@ -244,7 +263,7 @@ class LoginController extends Controller {
                 $this->logControle->log(print_r($objetoGrupo, true));
                 if ($objetoGrupo != null) {
                     $date = new \DateTime();
-                   
+
                     $objetoGrupo->setDataprimeiroacesso($date);
                     $this->em->flush();
                 }
