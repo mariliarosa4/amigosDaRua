@@ -114,10 +114,17 @@ class LoginController extends Controller {
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-                $nome = $objetoUsuario->getNmusuario();
-                $email = $objetoUsuario->getEmailusuario();
-                $dataNascimento = $objetoUsuario->getDtnascimento()->format('Y-m-d');
-                $this->enviarEmailEsquecerSenha($dataNascimento, $email, $nome);
+                   $this->logControle->log("horario  : " .$objetoUsuario->getDtprimeiroacesso() );
+//                if ($objetoUsuario->getDtprimeiroacesso()->date != "-0001-11-30 00:00:00.000000") {
+                    $nome = $objetoUsuario->getNmusuario();
+                    $email = $objetoUsuario->getEmailusuario();
+                    $dataNascimento = $objetoUsuario->getDtnascimento()->format('Y-m-d');
+                    $this->enviarEmailEsquecerSenha($dataNascimento, $email, $nome);
+//                } else {
+//                    $retornoRequest = array(
+//                        "primeiroAcesso" => false
+//                    );
+//                }
             }
 
             $retornoRequest = array(
@@ -132,7 +139,10 @@ class LoginController extends Controller {
     }
 
     public function enviarEmailEsquecerSenha($dtNascimento, $email, $nome) {
-        $criptografia = base64_encode($dtNascimento . '/' . $this->codigo . '/' . $email);
+        $dataAtual = new \DateTime();
+
+        $dataAtualFormatada = $dataAtual->format('Y-m-d');
+        $criptografia = base64_encode($dtNascimento . '/' . $this->codigo . '/' . $email . '/' . $dataAtualFormatada);
 
 
         $message = (new \Swift_Message('Redefinir senha'))
@@ -148,53 +158,47 @@ class LoginController extends Controller {
     }
 
     /**
-     * @Route("/change/{email}/{criptografia}")
+     * @Route("/change/{criptografia}")
      */
-    public function alterarSenha($email, $criptografia, Request $request) {
+    public function alterarSenha($criptografia, Request $request) {
         $stringDescriptografada = base64_decode($criptografia);
         $arrayString = (explode("/", $stringDescriptografada));
         $this->logControle->log(print_r($arrayString, true));
         $dtNascimento = $arrayString[0];
         $codigo = $arrayString[1];
         $emailString = $arrayString[2];
-        $this->logControle->log("Dtnascimento: " . $dtNascimento . " " . "emailstring " . $email);
-        $dataTime = new \DateTime($dtNascimento);
+        $dataCodigo = $arrayString[3];
 
-        if ($email == $emailString && $codigo == $this->codigo) {
+        $dataAtual = new \DateTime();
+        $dataCodigoFormatada = new \DateTime($dataCodigo);
 
-            $validarUusario = $this->getDoctrine()
-                    ->getRepository('AppBundle:Usuarios')
-                    ->findBy(array('emailusuario' => $email));
-            if (!$validarUusario) {
-                $this->logControle->log("invalido");
-                return $this->redirectToRoute('login'); //verificar outra possibilidade de mostrar erro
-            } else {
-                if ($validarUusario[0]->getDtnascimento()->format('Y-m-d') == $dtNascimento) {
-                    $this->logControle->log("valido");
-                    $user = new Usuarios();
-                    $this->formAlterarSenha = $this->createFormBuilder()
-                            ->add('senhausuario', PasswordType::class, array('label' => false))
-                            ->add('senhausuarioRepetido', PasswordType::class, array('label' => false))
-                            ->getForm();
-                    $this->formAlterarSenha->handleRequest($request);
+        $intervalo = $dataAtual->diff($dataCodigoFormatada);
+        $this->logControle->log("diferenca: " . print_r($intervalo, true));
+        if ($intervalo->days <= 3) {
 
-                    if ($this->formAlterarSenha->isSubmitted() && $this->formAlterarSenha->isValid()) {
-                        if ($this->autenticacao($user->getEmailusuario(), $user->getSenhausuario())) {
-                            return $this->redirectToRoute('home');
-                        } else {
-                            return $this->render('definirSenha.html.twig', array(
-                                        'form' => $this->formUserLogin->createView(), 'erro' => $this->error
-                            ));
-                        }
-                    }
-                    return $this->render('definirSenha.html.twig', array(
-                                'form' => $this->formAlterarSenha->createView()
-                    ));
-                } else {
+            $dataTime = new \DateTime($dtNascimento);
+
+            if ($codigo == $this->codigo) {
+
+                $validarUusario = $this->getDoctrine()
+                        ->getRepository('AppBundle:Usuarios')
+                        ->findBy(array('emailusuario' => $emailString));
+                if (!$validarUusario) {
                     $this->logControle->log("invalido");
-                    return $this->redirectToRoute('login');
+                    return $this->redirectToRoute('login'); //verificar outra possibilidade de mostrar erro
+                } else {
+                    if ($validarUusario[0]->getDtnascimento()->format('Y-m-d') == $dtNascimento) {
+                        $this->logControle->log("valido");
+
+                        return $this->render('definirSenha.html.twig', array('email' => $emailString));
+                    } else {
+                        $this->logControle->log("invalido");
+                        return $this->redirectToRoute('login');
+                    }
                 }
             }
+        } else {
+            return $this->render('login.html.twig');
         }
     }
 
@@ -209,13 +213,14 @@ class LoginController extends Controller {
 
             $this->logControle->log("nova senha : " . print_r($data, true));
 
-            $this->em = $this->getDoctrine()->resetManager();
+
 
             $objetoUsuario = $this->em->getRepository('AppBundle:Usuarios')
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-                $objetoUsuario->getSenhausuario($data['novasenha']);
+                $objetoUsuario->setSenhausuario($data['confirmaSenha']);
+                $this->em->persist($objetoUsuario);
                 $this->em->flush();
             }
 

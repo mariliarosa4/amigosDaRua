@@ -167,4 +167,62 @@ class Usuarios
     {
         return $this->dtnascimento;
     }
+    /**
+     * @var string
+     */
+    private $codigoprimeiroacesso;
+
+    /**
+     * @var \DateTime
+     */
+    private $dtprimeiroacesso;
+
+
+    /**
+     * Set codigoprimeiroacesso
+     *
+     * @param string $codigoprimeiroacesso
+     *
+     * @return Usuarios
+     */
+    public function setCodigoprimeiroacesso($codigoprimeiroacesso)
+    {
+        $this->codigoprimeiroacesso = $codigoprimeiroacesso;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoprimeiroacesso
+     *
+     * @return string
+     */
+    public function getCodigoprimeiroacesso()
+    {
+        return $this->codigoprimeiroacesso;
+    }
+
+    /**
+     * Set dtprimeiroacesso
+     *
+     * @param \DateTime $dtprimeiroacesso
+     *
+     * @return Usuarios
+     */
+    public function setDtprimeiroacesso($dtprimeiroacesso)
+    {
+        $this->dtprimeiroacesso = $dtprimeiroacesso;
+
+        return $this;
+    }
+
+    /**
+     * Get dtprimeiroacesso
+     *
+     * @return \DateTime
+     */
+    public function getDtprimeiroacesso()
+    {
+        return $this->dtprimeiroacesso;
+    }
 }
