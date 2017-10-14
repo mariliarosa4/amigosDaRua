@@ -109,4 +109,19 @@ class Categoriasdoacoes
     {
         return $this->outro;
     }
+    /**
+     * @var integer
+     */
+    private $idcategoriasdoacoes;
+
+
+    /**
+     * Get idcategoriasdoacoes
+     *
+     * @return integer
+     */
+    public function getIdcategoriasdoacoes()
+    {
+        return $this->idcategoriasdoacoes;
+    }
 }

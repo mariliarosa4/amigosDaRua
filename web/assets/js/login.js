@@ -52,9 +52,14 @@ function primeiroacesso(caminho) {
         async: false,
         success: function (response) {
             console.log(response);
-            if(response['primeiroAcesso']){
-                alert("Voce precisa realizar o primeiro acesso com o codigo fornecido");
+            if (window.confirm('Primeiro acesso realizado com sucesso! Vamos cadastrar sua senha.')) {
+                window.location = caminho + 'registrarSenha';
+            } else {
+                die();
             }
+//            if (response['primeiroAcesso']) {
+//                alert("Voce precisa realizar o primeiro acesso com o codigo fornecido");
+//            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -90,7 +95,7 @@ function novaSenha(caminho, email) {
                 if (window.confirm('Senha atualizada com sucesso! Va para a pagina de login.'))
                 {
 
-                    window.location = caminho + 'home';
+                    window.location = caminho + 'login';
                 } else
                 {
                     die();

@@ -39,6 +39,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         web_dir: "/amigosDaRua/app_dev.php/"
+        files_dir: "/amigosDaRua/"
 # Doctrine Configuration
 doctrine:
     dbal:

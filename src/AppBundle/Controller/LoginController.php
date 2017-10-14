@@ -55,6 +55,22 @@ class LoginController extends Controller {
         }
         if ($this->formUserLogin->isSubmitted() && $this->formUserLogin->isValid()) {
             if ($this->autenticacao($user->getEmailusuario(), $user->getSenhausuario())) {
+                $this->em = $this->getDoctrine()->getManager();
+
+                $queryBuilderGrupo = $this->em->createQueryBuilder();
+                $queryBuilderGrupo
+                        ->select('u,g')
+                        ->from('AppBundle:Grupos', 'g')
+                        ->innerJoin('g.idusuario', 'u', 'WITH', 'u.idusuario= g.idusuario')
+                        ->where($queryBuilderGrupo->expr()->eq('u.emailusuario', "'" . $user->getEmailusuario() . "'"))
+                        ->andWhere($queryBuilderGrupo->expr()->eq('u.tpusuario', "'G'"))
+                        ->getQuery()
+                        ->execute();
+                $queryBuilderGrupo = $queryBuilderGrupo->getQuery()->getArrayResult();
+
+
+                $this->logControle->log("grupoAutenticado : " . print_r($queryBuilderGrupo, true));
+                $this->get('session')->set('idGrupo', $queryBuilderGrupo[0]['idgrupos']);
                 return $this->redirectToRoute('home');
             } else {
                 return $this->render('login.html.twig', array(
@@ -114,12 +130,12 @@ class LoginController extends Controller {
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-                   $this->logControle->log("horario  : " .$objetoUsuario->getDtprimeiroacesso() );
+                $this->logControle->log("horario  : " . $objetoUsuario->getDtprimeiroacesso());
 //                if ($objetoUsuario->getDtprimeiroacesso()->date != "-0001-11-30 00:00:00.000000") {
-                    $nome = $objetoUsuario->getNmusuario();
-                    $email = $objetoUsuario->getEmailusuario();
-                    $dataNascimento = $objetoUsuario->getDtnascimento()->format('Y-m-d');
-                    $this->enviarEmailEsquecerSenha($dataNascimento, $email, $nome);
+                $nome = $objetoUsuario->getNmusuario();
+                $email = $objetoUsuario->getEmailusuario();
+                $dataNascimento = $objetoUsuario->getDtnascimento()->format('Y-m-d');
+                $this->enviarEmailEsquecerSenha($dataNascimento, $email, $nome);
 //                } else {
 //                    $retornoRequest = array(
 //                        "primeiroAcesso" => false
@@ -227,6 +243,9 @@ class LoginController extends Controller {
             $retornoRequest = array(
                 "sucesso" => true
             );
+            if ($this->get('session')->get('primeiroAcesso')) {
+                $this->get('session')->invalidate();
+            }
         } else {
             $retornoRequest = array(
                 "sucesso" => false
@@ -255,7 +274,7 @@ class LoginController extends Controller {
                     ->from('AppBundle:Grupos', 'g')
                     ->innerJoin('g.idusuario', 'u', 'WITH', 'u.idusuario= g.idusuario')
                     ->where($queryBuilderPrimeiro->expr()->eq('u.emailusuario', "'" . $data['email'] . "'"))
-                    ->andWhere($queryBuilderPrimeiro->expr()->eq('g.codigoprimeiroacesso', "'" . $data['codigo'] . "'"))
+                    ->andWhere($queryBuilderPrimeiro->expr()->eq('u.codigoprimeiroacesso', "'" . $data['codigo'] . "'"))
                     ->andWhere($queryBuilderPrimeiro->expr()->eq('u.tpusuario', "'G'"))
                     ->getQuery()
                     ->execute();
@@ -263,19 +282,22 @@ class LoginController extends Controller {
 
             $this->logControle->log(print_r($dadosPrimeiroAcesso, true));
             if (count($dadosPrimeiroAcesso) > 0) {
-                $objetoGrupo = $this->em->getRepository('AppBundle:Grupos')
-                        ->findOneBy(array('idgrupos' => $dadosPrimeiroAcesso[0]['idgrupos']));
+                $objetoGrupo = $this->em->getRepository('AppBundle:Usuarios')
+                        ->findOneBy(array('idusuario' => $dadosPrimeiroAcesso[0]['idusuario']['idusuario']));
                 $this->logControle->log(print_r($objetoGrupo, true));
                 if ($objetoGrupo != null) {
                     $date = new \DateTime();
 
-                    $objetoGrupo->setDataprimeiroacesso($date);
+                    $objetoGrupo->setDtprimeiroacesso($date);
+                    $this->em->persist($objetoGrupo);
                     $this->em->flush();
+                    $this->get('session')->set('primeiroAcesso', $data['email']);
+                    $retornoRequest = array(
+                        "sucesso" => true
+                    );
                 }
 
-                $retornoRequest = array(
-                    "sucesso" => true
-                );
+
                 // return $this->redirectToRoute('editarPerfil');
             } else {
                 $retornoRequest = array(
@@ -285,6 +307,14 @@ class LoginController extends Controller {
             }
         }
         return new JsonResponse($retornoRequest);
+    }
+
+    /**
+     * @Route("/registrarSenha")
+     */
+    public function registrarSenha(Request $request) {
+        $emailPrimeiroAcesso = $this->get('session')->get('primeiroAcesso');
+        return $this->render('definirSenha.html.twig', array('email' => $emailPrimeiroAcesso));
     }
 
     /**
