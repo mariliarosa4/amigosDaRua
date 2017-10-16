@@ -121,16 +121,15 @@ class LoginController extends Controller {
             $data = json_decode($request->getContent(), true);
             $request->request->replace(is_array($data) ? $data : array());
 
-            $this->logControle->log("email : " . print_r($data, true));
+            
 
             $this->em = $this->getDoctrine()->resetManager();
-            $this->logControle->log("desativar  : " . print_r($data['email'], true));
+          ;
 
             $objetoUsuario = $this->em->getRepository('AppBundle:Usuarios')
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-                $this->logControle->log("horario  : " . $objetoUsuario->getDtprimeiroacesso());
 //                if ($objetoUsuario->getDtprimeiroacesso()->date != "-0001-11-30 00:00:00.000000") {
                 $nome = $objetoUsuario->getNmusuario();
                 $email = $objetoUsuario->getEmailusuario();

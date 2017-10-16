@@ -1,0 +1,49 @@
+AppBundle\Entity\Acoes:
+    type: entity
+    table: acoes
+    indexes:
+        fk_Atividades_Grupos1_idx:
+            columns:
+                - idGrupos
+    uniqueConstraints:
+        idAtividades_UNIQUE:
+            columns:
+                - idAcao
+    id:
+        idacao:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idAcao
+            generator:
+                strategy: IDENTITY
+    fields:
+        dsacao:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: dsAcao
+        dtacao:
+            type: date
+            nullable: false
+            column: dtAcao
+        horaacao:
+            type: time
+            nullable: false
+            column: horaAcao
+    manyToOne:
+        idgrupos:
+            targetEntity: Grupos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idGrupos:
+                    referencedColumnName: idGrupos
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
