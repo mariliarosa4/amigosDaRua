@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+.cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  margin-bottom: 50px;
+}
+.card {
+  margin: 15px;
+  width: calc((100% / 3) - 30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-weight: 300;
+}
+.card:hover .card__inner {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+.card__inner {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  color: #949fb0;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 10px;
+}
+.card__inner:after {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.card__inner .material-icons {
+  width: 100%;
+  margin-top: .25em;
+}
+.card__expander {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-color: white;
+  width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-family: 'Lato';
+  font-size: 1.5em;
+}
+.card__expander .material-icons {
+  /*position: absolute;
+  top: 10px;
+  right: 10px;*/
+  /*position: relative;
+  top: -50px;
+  left: 50px;*/
+  position: relative;
+  top: -230px;
+  left: 300px;
+  cursor: pointer;
+  z-index: 1;
+}
+.card.is-collapsed .card__inner:after {
+  content: "";
+  opacity: 0;
+}
+.card.is-collapsed .card__expander {
+  max-height: 0;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  opacity: 0;
+}
+.card.is-expanded .card__inner:after {
+  content: "";
+  opacity: 1;
+  display: block;
+  height: 0;
+  width: 0;
+  position: absolute;
+  bottom: -30px;
+  left: calc(50% - 15px);
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #CCC;
+}
+.card.is-expanded .card__expander {
+  max-height: 1000px;
+  min-height: 200px;
+  overflow: visible;
+  margin-top: 30px;
+  opacity: 1;
+}
+.card.is-expanded:hover .card__inner {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.card.is-inactive .card__inner {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.card.is-inactive:hover .card__inner {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+@media screen and (max-width: 380px) {
+  .card {
+    margin-left: 0px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .card {
+    width: calc((100% / 2) - 30px);
+  }
+}
+@media screen and (max-width: 767px) {
+  .card {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .card:nth-of-type(3n+2) .card__expander {
+    margin-left: calc(-100% - 30px);
+  }
+
+  .card:nth-of-type(3n+3) .card__expander {
+    margin-left: calc(-200% - 60px);
+  }
+
+  .card:nth-of-type(3n+4) {
+    clear: left;
+  }
+
+  .card__expander {
+    width: calc(300% + 60px);
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .card:nth-of-type(2n+2) .card__expander {
+    margin-left: calc(-100% - 30px);
+  }
+
+  .card:nth-of-type(2n+3) {
+    clear: left;
+  }
+
+  .card__expander {
+    width: calc(200% + 30px);
+  }
+}
+
+/*>>>>>>>>>>>>>>>>>>>>>>>AQUI OUTRO CARD<<<<<<<<<<<<<<<<<<<<<<*/
+
+/* General */
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  font-weight: 300;
+  font-family: 'Lato';
+  height: 100%;
+  color: #7f8c8d;
+}
+
+/* Card */
+.newCard {
+  background: #fafafa; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #fafafa, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #fafafa, #ffffff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  display: block;
+  position: relative;
+  padding: 20px;
+}
+
+.newCard .card-info .name {
+  font-size: 28px;
+  font-weight: 100;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+.newCard .card-info hr {
+  margin: 0 0 15px;
+}
+
+.divDtHr{
+  display: flex;
+  width: 35%;
+  margin-top: 15px;
+}
+.divDtHr span{
+  float: left;
+  margin-top: 10px;
+}

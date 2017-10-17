@@ -50,34 +50,33 @@
                     <form>
                         <i class="material-icons">email</i>
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="email"   id="email">
+                            <input class="mdl-textfield__input" type="email" id="email">
                             <label class="mdl-textfield__label" for="email">E-mail</label>
                         </div>
                     </form>
                 </div>
-                <input  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Enviar" onclick='esquecerSenha("{{web_dir}}");'>
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Enviar" onclick='esquecerSenha("{{web_dir}}");'>
             </div>
 
             <div id="primeiroAcesso">
                 <i class="material-icons"  onclick="switchMenuPrimeiro()" style="cursor:pointer">arrow_back</i><br>
                 <form>
-                    <div class="divEmail">
-                        <i class="material-icons" >email</i>
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="email" id="emailPrimeiro">
-                            <label class="mdl-textfield__label" for="emailPrimeiro">E-mail</label>
-                        </div>
-                    </div>
-                    <div class="divCodigo">
-                        <i class="material-icons">lock</i>
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text"   id="codigo">
-                            <label class="mdl-textfield__label" for="codigo">codigo de acesso</label>
-                        </div>
-                    </div>
-                     </form>
-                    <input  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Entrar" onclick='primeiroacesso("{{web_dir}}");'>
-               
+                  <div class="divEmail">
+                      <i class="material-icons" >email</i>
+                      <div class="mdl-textfield mdl-js-textfield">
+                          <input class="mdl-textfield__input" type="email" id="emailPrimeiro">
+                          <label class="mdl-textfield__label" for="emailPrimeiro">E-mail</label>
+                      </div>
+                  </div>
+                  <div class="divCodigo">
+                      <i class="material-icons">lock</i>
+                      <div class="mdl-textfield mdl-js-textfield">
+                          <input class="mdl-textfield__input" type="text"   id="codigo">
+                          <label class="mdl-textfield__label" for="codigo">codigo de acesso</label>
+                      </div>
+                  </div>
+                    <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Entrar" onclick='primeiroacesso("{{web_dir}}");'>
+                </form>
             </div>
         </div>
     </body>
