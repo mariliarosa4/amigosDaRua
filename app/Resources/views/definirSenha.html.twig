@@ -11,33 +11,33 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <link rel="stylesheet" type = "text/css" href="../../../web/assets/css/definirSenha.css">
+        <script src="{{files_dir}}assets/js/login.js"></script>
+        <link rel="stylesheet" type = "text/css" href="{{files_dir}}assets/css/definirSenha.css">
     </head>
     <body>
         <div class="coluna">
             <div class="divLogo">
-                <img src="../../../web/assets/img/Design.png">
+                <img src="{{files_dir}}assets/img/Design.png">
             </div>
 
             <div id="definirSenha">
                 <div class="textoDefinirSenha">Escolha uma senha para usar como acesso</div>
 
-                  <div class="divSenha">
-                      <i class="material-icons">lock_open</i>
-                      <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="password">
-                        <label class="mdl-textfield__label" for="password">Senha</label>
-                      </div>
-                  </div>
-                  <div class="divConfirmarSenha">
-                      <i class="material-icons">lock_outline</i>
-                      <div class="mdl-textfield mdl-js-textfield">
+                <div class="divSenha">
+                    <i class="material-icons">lock_open</i>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="password" id="senha">
+                        <label class="mdl-textfield__label" for="senha">Senha</label>
+                    </div>
+                </div>
+                <div class="divConfirmarSenha">
+                    <i class="material-icons">lock_outline</i>
+                    <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input" type="password" id="confirmarSenha">
                         <label class="mdl-textfield__label" for="confirmarSenha">Confirmar senha</label>
-                      </div>
-                  </div>
-                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Salvar">
+                    </div>
+                </div>
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Salvar"  onclick='novaSenha("{{web_dir}}", "{{email}}");'>
             </div>
         </div>
     </body>

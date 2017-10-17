@@ -22,15 +22,19 @@ AppBundle\Entity\Acoes:
     fields:
         dsacao:
             type: string
-            nullable: false
+            nullable: true
             length: 45
             options:
                 fixed: false
             column: dsAcao
         dtacao:
-            type: datetime
+            type: date
             nullable: false
             column: dtAcao
+        horaacao:
+            type: time
+            nullable: false
+            column: horaAcao
     manyToOne:
         idgrupos:
             targetEntity: Grupos

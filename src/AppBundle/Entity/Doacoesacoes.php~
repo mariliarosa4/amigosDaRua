@@ -18,7 +18,7 @@ class Doacoesacoes
     private $idacao;
 
     /**
-     * @var \AppBundle\Entity\Categoriasitens
+     * @var \AppBundle\Entity\Categoriasdoacoes
      */
     private $idcategoriasdoacao;
 
@@ -60,11 +60,11 @@ class Doacoesacoes
     /**
      * Set idcategoriasdoacao
      *
-     * @param \AppBundle\Entity\Categoriasitens $idcategoriasdoacao
+     * @param \AppBundle\Entity\Categoriasdoacoes $idcategoriasdoacao
      *
      * @return Doacoesacoes
      */
-    public function setIdcategoriasdoacao(\AppBundle\Entity\Categoriasitens $idcategoriasdoacao = null)
+    public function setIdcategoriasdoacao(\AppBundle\Entity\Categoriasdoacoes $idcategoriasdoacao = null)
     {
         $this->idcategoriasdoacao = $idcategoriasdoacao;
 
@@ -74,7 +74,7 @@ class Doacoesacoes
     /**
      * Get idcategoriasdoacao
      *
-     * @return \AppBundle\Entity\Categoriasitens
+     * @return \AppBundle\Entity\Categoriasdoacoes
      */
     public function getIdcategoriasdoacao()
     {

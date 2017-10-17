@@ -2,13 +2,13 @@ AppBundle\Entity\Categoriasdoacoes:
     type: entity
     table: categoriasdoacoes
     id:
-        idcategoriasitens:
+        idcategoriasdoacoes:
             type: integer
             nullable: false
             options:
                 unsigned: false
             id: true
-            column: idCategoriasItens
+            column: idCategoriasDoacoes
             generator:
                 strategy: IDENTITY
     fields:

@@ -10,7 +10,7 @@ class Categoriasdoacoes
     /**
      * @var integer
      */
-    private $idcategoriasitens;
+    private $idcategoriasdoacoes;
 
     /**
      * @var string
@@ -29,13 +29,13 @@ class Categoriasdoacoes
 
 
     /**
-     * Get idcategoriasitens
+     * Get idcategoriasdoacoes
      *
      * @return integer
      */
-    public function getIdcategoriasitens()
+    public function getIdcategoriasdoacoes()
     {
-        return $this->idcategoriasitens;
+        return $this->idcategoriasdoacoes;
     }
 
     /**

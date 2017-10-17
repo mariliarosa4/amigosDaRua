@@ -40,17 +40,6 @@ AppBundle\Entity\Grupos:
             options:
                 unsigned: false
             column: numeroIntegrantes
-        codigoprimeiroacesso:
-            type: string
-            nullable: false
-            length: 45
-            options:
-                fixed: false
-            column: codigoPrimeiroAcesso
-        dataprimeiroacesso:
-            type: datetime
-            nullable: true
-            column: dataPrimeiroAcesso
     manyToOne:
         idusuario:
             targetEntity: Usuarios

@@ -41,6 +41,6 @@ AppBundle\Entity\Doacoesacoes:
             inversedBy: null
             joinColumns:
                 idCategoriasDoacao:
-                    referencedColumnName: idCategoriasItens
+                    referencedColumnName: idCategoriasDoacoes
             orphanRemoval: false
     lifecycleCallbacks: {  }

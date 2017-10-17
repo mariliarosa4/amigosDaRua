@@ -40,7 +40,7 @@ html, body{
   text-decoration: none;
   color: gray;
 }
-#recuperarSenha{
+#recuperarSenha, #primeiroAcesso{
   display: none;
 }
 .textoRecuperarSenha{

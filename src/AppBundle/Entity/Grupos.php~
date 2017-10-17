@@ -20,22 +20,17 @@ class Grupos
     /**
      * @var string
      */
-    private $nomeresponsavel;
-
-    /**
-     * @var string
-     */
-    private $emailresponsavel;
-
-    /**
-     * @var string
-     */
     private $telefoneresponsavel;
 
     /**
      * @var integer
      */
     private $numerointegrantes;
+
+    /**
+     * @var \AppBundle\Entity\Usuarios
+     */
+    private $idusuario;
 
 
     /**
@@ -70,54 +65,6 @@ class Grupos
     public function getNomegrupo()
     {
         return $this->nomegrupo;
-    }
-
-    /**
-     * Set nomeresponsavel
-     *
-     * @param string $nomeresponsavel
-     *
-     * @return Grupos
-     */
-    public function setNomeresponsavel($nomeresponsavel)
-    {
-        $this->nomeresponsavel = $nomeresponsavel;
-
-        return $this;
-    }
-
-    /**
-     * Get nomeresponsavel
-     *
-     * @return string
-     */
-    public function getNomeresponsavel()
-    {
-        return $this->nomeresponsavel;
-    }
-
-    /**
-     * Set emailresponsavel
-     *
-     * @param string $emailresponsavel
-     *
-     * @return Grupos
-     */
-    public function setEmailresponsavel($emailresponsavel)
-    {
-        $this->emailresponsavel = $emailresponsavel;
-
-        return $this;
-    }
-
-    /**
-     * Get emailresponsavel
-     *
-     * @return string
-     */
-    public function getEmailresponsavel()
-    {
-        return $this->emailresponsavel;
     }
 
     /**
@@ -166,5 +113,29 @@ class Grupos
     public function getNumerointegrantes()
     {
         return $this->numerointegrantes;
+    }
+
+    /**
+     * Set idusuario
+     *
+     * @param \AppBundle\Entity\Usuarios $idusuario
+     *
+     * @return Grupos
+     */
+    public function setIdusuario(\AppBundle\Entity\Usuarios $idusuario = null)
+    {
+        $this->idusuario = $idusuario;
+
+        return $this;
+    }
+
+    /**
+     * Get idusuario
+     *
+     * @return \AppBundle\Entity\Usuarios
+     */
+    public function getIdusuario()
+    {
+        return $this->idusuario;
     }
 }

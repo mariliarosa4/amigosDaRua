@@ -27,6 +27,26 @@ class Usuarios
      */
     private $senhausuario;
 
+    /**
+     * @var string
+     */
+    private $tpusuario;
+
+    /**
+     * @var \DateTime
+     */
+    private $dtnascimento;
+
+    /**
+     * @var \DateTime
+     */
+    private $dtprimeiroacesso;
+
+    /**
+     * @var string
+     */
+    private $codigoprimeiroacesso;
+
 
     /**
      * Get idusuario
@@ -109,16 +129,6 @@ class Usuarios
     {
         return $this->senhausuario;
     }
-    /**
-     * @var string
-     */
-    private $tpusuario;
-
-    /**
-     * @var \DateTime
-     */
-    private $dtnascimento;
-
 
     /**
      * Set tpusuario
@@ -166,5 +176,53 @@ class Usuarios
     public function getDtnascimento()
     {
         return $this->dtnascimento;
+    }
+
+    /**
+     * Set dtprimeiroacesso
+     *
+     * @param \DateTime $dtprimeiroacesso
+     *
+     * @return Usuarios
+     */
+    public function setDtprimeiroacesso($dtprimeiroacesso)
+    {
+        $this->dtprimeiroacesso = $dtprimeiroacesso;
+
+        return $this;
+    }
+
+    /**
+     * Get dtprimeiroacesso
+     *
+     * @return \DateTime
+     */
+    public function getDtprimeiroacesso()
+    {
+        return $this->dtprimeiroacesso;
+    }
+
+    /**
+     * Set codigoprimeiroacesso
+     *
+     * @param string $codigoprimeiroacesso
+     *
+     * @return Usuarios
+     */
+    public function setCodigoprimeiroacesso($codigoprimeiroacesso)
+    {
+        $this->codigoprimeiroacesso = $codigoprimeiroacesso;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoprimeiroacesso
+     *
+     * @return string
+     */
+    public function getCodigoprimeiroacesso()
+    {
+        return $this->codigoprimeiroacesso;
     }
 }

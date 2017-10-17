@@ -20,22 +20,17 @@ class Grupos
     /**
      * @var string
      */
-    private $nomeresponsavel;
-
-    /**
-     * @var string
-     */
-    private $emailresponsavel;
-
-    /**
-     * @var string
-     */
     private $telefoneresponsavel;
 
     /**
      * @var integer
      */
     private $numerointegrantes;
+
+    /**
+     * @var \AppBundle\Entity\Usuarios
+     */
+    private $idusuario;
 
 
     /**
@@ -70,54 +65,6 @@ class Grupos
     public function getNomegrupo()
     {
         return $this->nomegrupo;
-    }
-
-    /**
-     * Set nomeresponsavel
-     *
-     * @param string $nomeresponsavel
-     *
-     * @return Grupos
-     */
-    public function setNomeresponsavel($nomeresponsavel)
-    {
-        $this->nomeresponsavel = $nomeresponsavel;
-
-        return $this;
-    }
-
-    /**
-     * Get nomeresponsavel
-     *
-     * @return string
-     */
-    public function getNomeresponsavel()
-    {
-        return $this->nomeresponsavel;
-    }
-
-    /**
-     * Set emailresponsavel
-     *
-     * @param string $emailresponsavel
-     *
-     * @return Grupos
-     */
-    public function setEmailresponsavel($emailresponsavel)
-    {
-        $this->emailresponsavel = $emailresponsavel;
-
-        return $this;
-    }
-
-    /**
-     * Get emailresponsavel
-     *
-     * @return string
-     */
-    public function getEmailresponsavel()
-    {
-        return $this->emailresponsavel;
     }
 
     /**
@@ -166,69 +113,6 @@ class Grupos
     public function getNumerointegrantes()
     {
         return $this->numerointegrantes;
-    }
-    /**
-     * @var string
-     */
-    private $codigoprimeiroacesso;
-
-    /**
-     * @var \DateTime
-     */
-    private $dataprimeiroacesso;
-
-    /**
-     * @var \AppBundle\Entity\Usuarios
-     */
-    private $idusuario;
-
-
-    /**
-     * Set codigoprimeiroacesso
-     *
-     * @param string $codigoprimeiroacesso
-     *
-     * @return Grupos
-     */
-    public function setCodigoprimeiroacesso($codigoprimeiroacesso)
-    {
-        $this->codigoprimeiroacesso = $codigoprimeiroacesso;
-
-        return $this;
-    }
-
-    /**
-     * Get codigoprimeiroacesso
-     *
-     * @return string
-     */
-    public function getCodigoprimeiroacesso()
-    {
-        return $this->codigoprimeiroacesso;
-    }
-
-    /**
-     * Set dataprimeiroacesso
-     *
-     * @param \DateTime $dataprimeiroacesso
-     *
-     * @return Grupos
-     */
-    public function setDataprimeiroacesso($dataprimeiroacesso)
-    {
-        $this->dataprimeiroacesso = $dataprimeiroacesso;
-
-        return $this;
-    }
-
-    /**
-     * Get dataprimeiroacesso
-     *
-     * @return \DateTime
-     */
-    public function getDataprimeiroacesso()
-    {
-        return $this->dataprimeiroacesso;
     }
 
     /**

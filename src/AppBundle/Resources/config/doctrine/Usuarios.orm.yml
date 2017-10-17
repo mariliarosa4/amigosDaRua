@@ -44,4 +44,15 @@ AppBundle\Entity\Usuarios:
             type: date
             nullable: false
             column: dtNascimento
+        dtprimeiroacesso:
+            type: datetime
+            nullable: true
+            column: dtPrimeiroAcesso
+        codigoprimeiroacesso:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: codigoPrimeiroAcesso
     lifecycleCallbacks: {  }
