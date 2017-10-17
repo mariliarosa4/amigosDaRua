@@ -11,6 +11,7 @@ use AppBundle\Entity\Locaisacoes;
 use AppBundle\Entity\Categoriasdoacoes;
 use AppBundle\Entity\Doacoesacoes;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -50,11 +51,12 @@ class TelaPrincipalController extends Controller {
         $resultadoAcao = $queryBuilderAcao->getQuery()->getArrayResult();
 
         foreach ($resultadoAcao as $acao) {
-
+            $this->logControle->log("acoes : " . print_r($acao, true));
             $dadosAcao[$acao['idacao']]['acao'] = array(
-                'data' => $acao['dtacao']->format('Y-m-d'),
-                'hora' => $acao['horaacao']->format('H:i:s'),
-                'descricao' => $acao['dsacao']
+                'data' => $acao['dtacao']->format('d-m-Y'),
+                'hora' => $acao['horaacao']->format('H:i'),
+                'descricao' => $acao['dsacao'],
+                'nomeGrupo' => $acao['idgrupos']['nomegrupo']
             );
 
             $queryBuilderAcaoLocal = $this->em->createQueryBuilder();
@@ -86,11 +88,11 @@ class TelaPrincipalController extends Controller {
             $resultadoAcaoDoacoes = $queryBuilderAcaoDoacoes->getQuery()->getArrayResult();
             foreach ($resultadoAcaoDoacoes as $acoesDoacoes) {
 
-                $dadosAcao[$acao['idacao']]['categoriasChecked'][$acoesDoacoes['idcategoriasdoacao']['idcategoriasdoacoes']] = true;
+                $dadosAcao[$acao['idacao']]['categoriasChecked'][$acoesDoacoes['idcategoriasdoacao']['idcategoriasdoacoes']] = $acoesDoacoes['idcategoriasdoacao']['nomesubcategoria'];
             }
         }
         $this->logControle->log("acoes do grupo : " . print_r($dadosAcao, true));
-        return $this->render('base.html.twig', array('acoes'=>$dadosAcao));
+        return $this->render('home.html.twig', array('acoes' => $dadosAcao));
     }
 
 }

@@ -66,7 +66,7 @@
 
                                                             <li>
                                                                 <div class="pure-checkbox">
-                                                                    <input id="{{opcao.idCategoria}}" name="checkbox" type="checkbox" value="{{opcao.idCategoria}}" {%if opcao.idCategoria in acaoEdicao.categoriasChecked|keys %}checked{%endif%}>
+                                                                    <input id="{{opcao.idCategoria}}" name="checkbox" type="checkbox" value="{{opcao.idCategoria}}" {%if acaoEdicao is defined and opcao.idCategoria in acaoEdicao.categoriasChecked|keys %}checked{%endif%}>
                                                                     <label for="{{opcao.idCategoria}}">{{opcao.subcategoria}}</label>
                                                                 </div>
                                                             </li>
