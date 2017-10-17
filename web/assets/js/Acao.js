@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -47,4 +47,12 @@ function salvarAcao(caminho,idAcao) {
     });
 
     return false;
+}
+
+function addLocal(){
+  var inputLocal = document.getElementsByClassName("divLocais")[0];
+  var clone = inputLocal.cloneNode(true);
+  document.getElementById("locais").appendChild(clone);
+
+  $( "#local" ).last().val('');
 }

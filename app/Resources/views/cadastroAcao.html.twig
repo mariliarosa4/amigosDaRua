@@ -33,13 +33,16 @@
                                         <h2 class="mdl-card__title-text">Adicionar ação</h2>
                                     </div>
                                     <form action="#">
+                                      <div id="locais">
                                         <div class="divLocais">
                                             <i class="material-icons">location_on</i>
                                             <div class="mdl-textfield mdl-js-textfield">
                                                 <input class="mdl-textfield__input" type="text" id="local" value="{%if acaoEdicao.endereco.endereco is defined %}{{acaoEdicao.endereco.endereco}}{%endif%}">
                                                 <label class="mdl-textfield__label" for="local">Local</label>
                                             </div>
+                                            <i class="material-icons addLocal" onclick="addLocal();">add_circle_outline</i>
                                         </div>
+                                      </div>
 
                                         <div class="divDiaHora">
                                             <i class="material-icons">date_range</i>
@@ -96,8 +99,8 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ81OQZWchWDs02c2A5tXiyR181yh2ZFc&libraries=places"></script>
         <script type="text/javascript">
-                                        var input = document.getElementById('local');
-                                        var options = {
+          var input = document.getElementById('local');
+          var options = {
             {#types: ['(cities)'],
             componentRestrictions: {country: 'fr'}#}
                 };
