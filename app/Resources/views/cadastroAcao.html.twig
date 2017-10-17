@@ -83,7 +83,7 @@
                                     </form>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
-                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="salvarAcao('{{web_dir}}');">
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="salvarAcao('{{web_dir}}', {%if idAcao is defined%}'{{idAcao}}'{%else%}null{%endif%});">
                                         Salvar
                                     </a>
                                 </div>
@@ -96,13 +96,13 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ81OQZWchWDs02c2A5tXiyR181yh2ZFc&libraries=places"></script>
         <script type="text/javascript">
-                                       var input = document.getElementById('local');
-                                       var options = {
+                                        var input = document.getElementById('local');
+                                        var options = {
             {#types: ['(cities)'],
             componentRestrictions: {country: 'fr'}#}
-                   };
+                };
 
-                   autocomplete = new google.maps.places.Autocomplete(input, options);
+                autocomplete = new google.maps.places.Autocomplete(input, options);
         </script>
         <script src="{{files_dir}}assets/js/Acao.js"></script>
     </body>

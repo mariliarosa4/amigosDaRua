@@ -65,7 +65,7 @@ class AcoesController extends Controller {
         $resultadoAcao = $queryBuilderAcao->getQuery()->getArrayResult();
 
         foreach ($resultadoAcao as $acao) {
-          
+
             $dadosAcao['acao'] = array(
                 'data' => $acao['dtacao']->format('Y-m-d'),
                 'hora' => $acao['horaacao']->format('H:i:s'),
@@ -82,7 +82,7 @@ class AcoesController extends Controller {
                 ->execute();
         $resultadoAcaoLocal = $queryBuilderAcaoLocal->getQuery()->getArrayResult();
         foreach ($resultadoAcaoLocal as $acaoLocal) {
-          
+
             $dadosAcao['endereco'] = array(
                 'endereco' => $acaoLocal['endereco']
             );
@@ -100,12 +100,12 @@ class AcoesController extends Controller {
                 ->execute();
         $resultadoAcaoDoacoes = $queryBuilderAcaoDoacoes->getQuery()->getArrayResult();
         foreach ($resultadoAcaoDoacoes as $acoesDoacoes) {
-          
-            $dadosAcao['categoriasChecked'][$acoesDoacoes['idcategoriasdoacao']['idcategoriasdoacoes']]=true;
+
+            $dadosAcao['categoriasChecked'][$acoesDoacoes['idcategoriasdoacao']['idcategoriasdoacoes']] = true;
         }
         $opcosDoacoes = $this->carregarCategoriasDoacoes();
-          $this->logControle->log("dados acao : " . print_r($dadosAcao, true));
-        return $this->render('cadastroAcao.html.twig', array('opcoesDoacoes' => $opcosDoacoes, 'acaoEdicao' => $dadosAcao));
+        $this->logControle->log("dados acao : " . print_r($dadosAcao, true));
+        return $this->render('cadastroAcao.html.twig', array('opcoesDoacoes' => $opcosDoacoes, 'acaoEdicao' => $dadosAcao, 'idAcao' => $codigo));
     }
 
     /**
@@ -117,7 +117,13 @@ class AcoesController extends Controller {
             $data = json_decode($request->getContent(), true);
             $request->request->replace(is_array($data) ? $data : array());
             $this->logControle->log("salvarAcao : " . print_r($data, true));
-            $acao = new Acoes();
+            if (!empty($data['idAcao'])) {
+                $acao = $this->getDoctrine()
+                        ->getRepository('AppBundle:Acoes')
+                        ->findOneBy(array('idacao' => $data['idAcao']));
+            } else {
+                $acao = new Acoes();
+            }
             if (!empty($data['detalhes'])) {
                 $acao->setDsacao($data['detalhes']);
             }
@@ -135,11 +141,14 @@ class AcoesController extends Controller {
             $this->em->persist($acao);
             $this->em->flush();
             $this->em = $this->getDoctrine()->getManager();
+            
+            
             $localAcao = new Locaisacoes();
             $localAcao->setEndereco($data['local']);
             $localAcao->setIdacao($acao);
             $this->em->persist($localAcao);
             $this->em->flush();
+            
             $this->em = $this->getDoctrine()->getManager();
             foreach ($data['categorias'] as $categorias) {
                 $this->logControle->log("categorias : " . print_r($categorias, true));
