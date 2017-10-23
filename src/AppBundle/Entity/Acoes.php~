@@ -109,4 +109,33 @@ class Acoes
     {
         return $this->idgrupos;
     }
+    /**
+     * @var \DateTime
+     */
+    private $horaacao;
+
+
+    /**
+     * Set horaacao
+     *
+     * @param \DateTime $horaacao
+     *
+     * @return Acoes
+     */
+    public function setHoraacao($horaacao)
+    {
+        $this->horaacao = $horaacao;
+
+        return $this;
+    }
+
+    /**
+     * Get horaacao
+     *
+     * @return \DateTime
+     */
+    public function getHoraacao()
+    {
+        return $this->horaacao;
+    }
 }

@@ -121,10 +121,10 @@ class LoginController extends Controller {
             $data = json_decode($request->getContent(), true);
             $request->request->replace(is_array($data) ? $data : array());
 
-            
+
 
             $this->em = $this->getDoctrine()->resetManager();
-          ;
+            ;
 
             $objetoUsuario = $this->em->getRepository('AppBundle:Usuarios')
                     ->findOneBy(array('emailusuario' => $data['email']));
@@ -258,45 +258,30 @@ class LoginController extends Controller {
      * @Route("/primeiroacesso")
      */
     public function primeiroacesso(Request $request) {
-        $this->em = $this->getDoctrine()->getManager();
+      $this->em = $this->getDoctrine()->getManager();
         if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
             $data = json_decode($request->getContent(), true);
             $request->request->replace(is_array($data) ? $data : array());
 
-            $this->logControle->log("primeiro acesso: " . print_r($data, true));
+             $validarUusario = $this->getDoctrine()
+                        ->getRepository('AppBundle:Usuarios')
+                        ->findOneBy(array('emailusuario'=>$data['email'],'tpusuario'=>'G','codigoprimeiroacesso'=>$data['codigo']));
+             
+              $this->logControle->log("validar: " . print_r($validarUusario, true));
+          
 
-            $this->em = $this->getDoctrine()->resetManager();
-
-            $queryBuilderPrimeiro = $this->em->createQueryBuilder();
-            $queryBuilderPrimeiro
-                    ->select('u,g')
-                    ->from('AppBundle:Grupos', 'g')
-                    ->innerJoin('g.idusuario', 'u', 'WITH', 'u.idusuario= g.idusuario')
-                    ->where($queryBuilderPrimeiro->expr()->eq('u.emailusuario', "'" . $data['email'] . "'"))
-                    ->andWhere($queryBuilderPrimeiro->expr()->eq('u.codigoprimeiroacesso', "'" . $data['codigo'] . "'"))
-                    ->andWhere($queryBuilderPrimeiro->expr()->eq('u.tpusuario', "'G'"))
-                    ->getQuery()
-                    ->execute();
-            $dadosPrimeiroAcesso = $queryBuilderPrimeiro->getQuery()->getArrayResult();
-
-            $this->logControle->log(print_r($dadosPrimeiroAcesso, true));
-            if (count($dadosPrimeiroAcesso) > 0) {
-                $objetoGrupo = $this->em->getRepository('AppBundle:Usuarios')
-                        ->findOneBy(array('idusuario' => $dadosPrimeiroAcesso[0]['idusuario']['idusuario']));
-                $this->logControle->log(print_r($objetoGrupo, true));
-                if ($objetoGrupo != null) {
+            if (count($validarUusario) > 0) {
+           
                     $date = new \DateTime();
 
-                    $objetoGrupo->setDtprimeiroacesso($date);
-                    $this->em->persist($objetoGrupo);
+                    $validarUusario->setDtprimeiroacesso($date);
+                    $this->em->persist($validarUusario);
                     $this->em->flush();
                     $this->get('session')->set('primeiroAcesso', $data['email']);
                     $retornoRequest = array(
                         "sucesso" => true
                     );
-                }
-
-
+                
                 // return $this->redirectToRoute('editarPerfil');
             } else {
                 $retornoRequest = array(

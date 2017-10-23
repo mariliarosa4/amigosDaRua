@@ -1,6 +1,10 @@
 AppBundle\Entity\Usuarios:
     type: entity
     table: usuarios
+    uniqueConstraints:
+        emailUsuario_UNIQUE:
+            columns:
+                - emailUsuario
     id:
         idusuario:
             type: integer

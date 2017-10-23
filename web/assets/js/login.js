@@ -34,11 +34,12 @@ function esquecerSenha(caminho) {
 }
 function primeiroacesso(caminho) {
     alert("teste primeiro acesso");
-    var email = $('#emailPrimeiro').val();
-    var codigo = $('#codigo').val();
+    alert(caminho);
+    var email = $('#emailPrimeiro').val().trim();
+    var codigo = $('#codigo').val().trim();
     var dataString = {
-        email: email,
-        codigo: codigo
+        email:email,
+        codigo:codigo
     };
     console.log(JSON.stringify(dataString));
     $.ajax({
@@ -52,21 +53,19 @@ function primeiroacesso(caminho) {
         async: false,
         success: function (response) {
             console.log(response);
-            if (window.confirm('Primeiro acesso realizado com sucesso! Vamos cadastrar sua senha.')) {
-                window.location = caminho + 'registrarSenha';
-            } else {
-                die();
+            if (response.sucesso) {
+                alert('Primeiro acesso realizado com sucesso! Vamos cadastrar sua senha.');
+              
+               
             }
-//            if (response['primeiroAcesso']) {
-//                alert("Voce precisa realizar o primeiro acesso com o codigo fornecido");
-//            }
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
         }
 
     });
-    return false;
+  
 }
 
 function novaSenha(caminho, email) {

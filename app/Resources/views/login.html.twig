@@ -12,14 +12,14 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <link rel="stylesheet" type = "text/css" href="../../../web/assets/css/login.css">
-        <link rel="stylesheet" type = "text/css" href="../assets/css/login.css">
+        <link rel="stylesheet" type = "text/css" href="{{files_dir}}assets/css/login.css">
+       
       
     </head>
     <body>
         <div class="coluna">
             <div class="divLogo">
-                <img src="../assets/img/Design.png">
+                <img src="../assets/img/logo.jpeg">
             </div>
             <div id="login">
                 {{ form_start(form) }}
@@ -76,6 +76,9 @@
                       </div>
                   </div>
                     <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Entrar" onclick='primeiroacesso("{{web_dir}}");'>
+                    
+                    <a href="{{web_dir}}registrarSenha" id="novasenha" >Cadastrar Senha</a> 
+                 {#   seria legal colocar esse link como um botao#}
                 </form>
             </div>
         </div>

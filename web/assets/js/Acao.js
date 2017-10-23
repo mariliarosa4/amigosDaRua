@@ -5,9 +5,10 @@
  */
 
 
-function salvarAcao(caminho,idAcao) {
+function salvarAcao(caminho, idAcao) {
 
     var local = $('#local').val();
+    console.log(local);
     var data = $('#data').val();
     var hora = $('#hora').val();
     var detalhes = $('#detalhes').val();
@@ -22,7 +23,7 @@ function salvarAcao(caminho,idAcao) {
         hora: hora,
         categorias: selectedDoacoes,
         detalhes: detalhes,
-        idAcao:idAcao
+        idAcao: idAcao
     };
     console.log(JSON.stringify(dataString));
     $.ajax({
@@ -36,7 +37,7 @@ function salvarAcao(caminho,idAcao) {
         async: false,
         success: function (response) {
             console.log(response);
-            alert("Ação registrada com sucesso para o dia "+data+" as "+hora+" em "+ local);
+            alert("Ação registrada com sucesso para o dia " + data + " as " + hora + " em " + local);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -49,10 +50,10 @@ function salvarAcao(caminho,idAcao) {
     return false;
 }
 
-function addLocal(){
-  var inputLocal = document.getElementsByClassName("divLocais")[0];
-  var clone = inputLocal.cloneNode(true);
-  document.getElementById("locais").appendChild(clone);
+function addLocal() {
+    var inputLocal = document.getElementsByClassName("divLocais")[0];
+    var clone = inputLocal.cloneNode(true);
+    document.getElementById("locais").appendChild(clone);
 
-  $( "#local" ).last().val('');
+    $("#local").last().val('');
 }

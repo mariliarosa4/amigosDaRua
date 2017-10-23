@@ -11,11 +11,11 @@ html, body{
 }
 
 .divLogo{
-  width: 100%;
+  width: 50%;
   height: 50vh;
 }
 .divLogo img{
-  max-width: 100%;
+  max-width: 60%;
 }
 .divEmail, .divSenha, .divCodigo{
   width: 100%;
