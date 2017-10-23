@@ -49,11 +49,3 @@ function salvarAcao(caminho, idAcao) {
 
     return false;
 }
-
-function addLocal() {
-    var inputLocal = document.getElementsByClassName("divLocais")[0];
-    var clone = inputLocal.cloneNode(true);
-    document.getElementById("locais").appendChild(clone);
-
-    $("#local").last().val('');
-}

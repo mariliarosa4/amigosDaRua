@@ -47,12 +47,12 @@
                                         <div class="divDiaHora">
                                             <i class="material-icons">date_range</i>
                                             <div class="mdl-textfield mdl-js-textfield" id="inputData">
-                                                <input class="mdl-textfield__input" type="date" id="data" value="{%if acaoEdicao.acao.data is defined %}{{acaoEdicao.acao.data}}{%endif%}">
+                                                <input class="mdl-textfield__input" type="date" id="data" value="{%if acaoEdicao.acao.data is defined %}{{acaoEdicao.acao.data}}{%endif%}" required>
                                             </div>
 
                                             <i class="material-icons" id="iconHora">schedule</i>
                                             <div class="mdl-textfield mdl-js-textfield" id="inputHora">
-                                                <input class="mdl-textfield__input" type="time" id="hora" value="{%if acaoEdicao.acao.hora is defined %}{{acaoEdicao.acao.hora}}{%endif%}">
+                                                <input class="mdl-textfield__input" type="time" id="hora" value="{%if acaoEdicao.acao.hora is defined %}{{acaoEdicao.acao.hora}}{%endif%}" required>
                                             </div>
                                         </div>
 
@@ -99,7 +99,7 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ81OQZWchWDs02c2A5tXiyR181yh2ZFc&libraries=places"></script>
         <script type="text/javascript">
-                                      
+
                                         var input = document.getElementById('local');
 
                                         var options = {
@@ -108,6 +108,22 @@
                 };
 
                 autocomplete = new google.maps.places.Autocomplete(input, options);
+
+
+          function addLocal() {
+              var inputLocal = document.getElementsByClassName("divLocais")[0];
+              var clone = inputLocal.cloneNode(true);
+              document.getElementById("locais").appendChild(clone);
+
+              $("#local").last().val('');
+
+              var options = {
+                {#types: ['(cities)'],
+                componentRestrictions: {country: 'fr'}#}
+              };
+
+              autocomplete = new google.maps.places.Autocomplete($("#local").last(), options);
+          }
         </script>
         <script src="{{files_dir}}assets/js/Acao.js"></script>
     </body>
