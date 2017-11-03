@@ -29,6 +29,7 @@ function validarEmail(caminho) {
             } else {
                 alert("email valido");
             }
+            setTimeout(function() { document.getElementById("EmailResponsavel").focus(); }, 1); 
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);

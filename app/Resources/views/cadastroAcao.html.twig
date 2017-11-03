@@ -37,7 +37,7 @@
                                             <div class="divLocais">
                                                 <i class="material-icons">location_on</i>
                                                 <div class="mdl-textfield mdl-js-textfield">
-                                                    <input class="mdl-textfield__input" type="text" id="local" value="{%if acaoEdicao.endereco.endereco is defined %}{{acaoEdicao.endereco.endereco}}{%endif%}">
+                                                    <input class="mdl-textfield__input locais" type="text" id="local" value="{%if acaoEdicao.endereco.endereco is defined %}{{acaoEdicao.endereco.endereco}}{%endif%}">
                                                     <label class="mdl-textfield__label" for="local">Local</label>
                                                 </div>
                                                 <i class="material-icons addLocal" onclick="addLocal();">add_circle_outline</i>
@@ -98,33 +98,20 @@
         </div>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ81OQZWchWDs02c2A5tXiyR181yh2ZFc&libraries=places"></script>
+         <script src="{{files_dir}}assets/js/Acao.js"></script>
         <script type="text/javascript">
-
-                                        var input = document.getElementById('local');
-
-                                        var options = {
-            {#types: ['(cities)'],
-            componentRestrictions: {country: 'fr'}#}
-                };
-
-                autocomplete = new google.maps.places.Autocomplete(input, options);
 
 
           function addLocal() {
               var inputLocal = document.getElementsByClassName("divLocais")[0];
               var clone = inputLocal.cloneNode(true);
+             
               document.getElementById("locais").appendChild(clone);
-
-              $("#local").last().val('');
-
-              var options = {
-                {#types: ['(cities)'],
-                componentRestrictions: {country: 'fr'}#}
-              };
-
-              autocomplete = new google.maps.places.Autocomplete($("#local").last(), options);
+               $("#local").last().val('');
+           initialize();
           }
+          initialize();
         </script>
-        <script src="{{files_dir}}assets/js/Acao.js"></script>
+       
     </body>
 </html>
