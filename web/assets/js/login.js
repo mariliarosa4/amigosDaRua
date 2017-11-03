@@ -23,7 +23,14 @@ function esquecerSenha(caminho) {
         async: false,
         success: function (response) {
             console.log(response);
-            alert("Email enviado com sucesso!");//melhorar a forma de exibir esse aviso
+            if (response.sucesso) {
+                alert("Email enviado com sucesso!");//melhorar a forma de exibir esse aviso
+            }
+            if (response.emailNaoCadastrado) {
+                alert("Email incorreto!");//melhorar a forma de exibir esse aviso
+            }
+
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -33,13 +40,11 @@ function esquecerSenha(caminho) {
     return false;
 }
 function primeiroacesso(caminho) {
-    alert("teste primeiro acesso");
-    alert(caminho);
     var email = $('#emailPrimeiro').val().trim();
     var codigo = $('#codigo').val().trim();
     var dataString = {
-        email:email,
-        codigo:codigo
+        email: email,
+        codigo: codigo
     };
     console.log(JSON.stringify(dataString));
     $.ajax({
@@ -54,9 +59,8 @@ function primeiroacesso(caminho) {
         success: function (response) {
             console.log(response);
             if (response.sucesso) {
-                alert('Primeiro acesso realizado com sucesso! Vamos cadastrar sua senha.');
-              
-               
+                alert('Primeiro acesso realizado com sucesso! Clique em cadastrar senha.');
+
             }
 
         },
@@ -65,7 +69,7 @@ function primeiroacesso(caminho) {
         }
 
     });
-  
+
 }
 
 function novaSenha(caminho, email) {
@@ -94,7 +98,7 @@ function novaSenha(caminho, email) {
                 if (window.confirm('Senha atualizada com sucesso! Va para a pagina de login.'))
                 {
 
-                    window.location = caminho + 'login';
+                    window.location.href = caminho + 'login';
                 } else
                 {
                     die();

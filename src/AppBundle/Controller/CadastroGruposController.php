@@ -83,7 +83,7 @@ class CadastroGruposController extends Controller {
                 $this->em->persist($objetoUsuario);
                 $this->em->persist($objetoGrupo);
 
-                $codigo = $this->gerarCodigoAcesso($dataNascimentoFormatada);
+                $codigo = $this->gerarCodigoAcesso($dataNascimentoFormatada, $data['nomeGrupo']);
                 $objetoUsuario->setCodigoprimeiroacesso($codigo);
                 $this->enviarEmailCodigo($codigo, $data['emailResponsavel'], $data['nomeResponsavel']);
                 $this->em->persist($objetoUsuario);
@@ -107,26 +107,25 @@ class CadastroGruposController extends Controller {
         return new JsonResponse($retornoRequest);
     }
 
-    public function gerarCodigoAcesso($dtNascimento) {
+    public function gerarCodigoAcesso($dtNascimento, $nomeGrupo) {
         $this->logControle->log("dt : " . print_r($dtNascimento, true));
-        $hashCodigo = substr(md5($dtNascimento->date), 0, 8);
+        $hashCodigo = substr(md5($dtNascimento->date.$nomeGrupo), 0, 8);
         return $hashCodigo;
     }
 
     public function enviarEmailCodigo($hashCodigo, $email, $nome) {
+
         $from = new SendGrid\Email("appamigosdarua", "appamigosdarua@gmail.com");
         $subject = "primeiro acesso amigos da rua";
-        $to = new SendGrid\Email("mariliarosilva", "mariliarosilva@gmail.com");
-        $content = new SendGrid\Content("text/html",  $this->renderView(
+        $to = new SendGrid\Email(null, $email);
+        $content = new SendGrid\Content("text/html", $this->renderView(
                         'Emails/emailCodigoAcesso.html.twig', array('hashCodigo' => $hashCodigo, "nome" => $nome, "email" => $email)
-                ));
+        ));
         $mail = new SendGrid\Mail($from, $subject, $to, $content);
-        $apiKey = "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";
+        $apiKey = $this->container->getParameter('key_sendgrid');
         $sg = new \SendGrid($apiKey);
         $response = $sg->client->mail()->send()->post($mail);
-        echo $response->statusCode();
-
-        echo $response->body();
+        $this->logControle->log("codigo status response envio email: " . $response->statusCode());
     }
 
 }
