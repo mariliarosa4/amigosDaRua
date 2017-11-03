@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
+use SendGrid;
 
 class LoginController extends Controller {
 
@@ -124,27 +125,26 @@ class LoginController extends Controller {
 
 
             $this->em = $this->getDoctrine()->resetManager();
-            
+
 
             $objetoUsuario = $this->em->getRepository('AppBundle:Usuarios')
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-//                if ($objetoUsuario->getDtprimeiroacesso()->date != "-0001-11-30 00:00:00.000000") {
                 $nome = $objetoUsuario->getNmusuario();
                 $email = $objetoUsuario->getEmailusuario();
                 $dataNascimento = $objetoUsuario->getDtnascimento()->format('Y-m-d');
                 $this->enviarEmailEsquecerSenha($dataNascimento, $email, $nome);
-//                } else {
-//                    $retornoRequest = array(
-//                        "primeiroAcesso" => false
-//                    );
-//                }
-            }
 
+                $retornoRequest = array(
+                    "sucesso" => true
+                );
+        }else{
             $retornoRequest = array(
-                "sucesso" => true
+                "emailNaoCadastrado" => true
             );
+        }
+        
         } else {
             $retornoRequest = array(
                 "sucesso" => false
@@ -160,16 +160,17 @@ class LoginController extends Controller {
         $criptografia = base64_encode($dtNascimento . '/' . $this->codigo . '/' . $email . '/' . $dataAtualFormatada);
 
 
-        $message = (new \Swift_Message('Redefinir senha'))
-                ->setFrom('appamigosdarua@gmail.com')
-                ->setTo($email)
-                ->setBody(
-                $this->renderView(
+        $from = new SendGrid\Email("appamigosdarua", "appamigosdarua@gmail.com");
+        $subject = "Redefinir senha";
+        $to = new SendGrid\Email(null, $email);
+        $content = new SendGrid\Content("text/html", $this->renderView(
                         'Emails/email.html.twig', array('criptografia' => $criptografia, "nome" => $nome, "email" => $email)
-                ), 'text/html'
-        );
-
-        $this->get('mailer')->send($message);
+        ));
+        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+        $apiKey = $this->container->getParameter('key_sendgrid');
+        $sg = new \SendGrid($apiKey);
+        $response = $sg->client->mail()->send()->post($mail);
+        $this->logControle->log("codigo status response envio email: " . $response->statusCode());
     }
 
     /**
@@ -258,30 +259,30 @@ class LoginController extends Controller {
      * @Route("/primeiroacesso")
      */
     public function primeiroacesso(Request $request) {
-      $this->em = $this->getDoctrine()->getManager();
+        $this->em = $this->getDoctrine()->getManager();
         if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
             $data = json_decode($request->getContent(), true);
             $request->request->replace(is_array($data) ? $data : array());
 
-             $validarUusario = $this->getDoctrine()
-                        ->getRepository('AppBundle:Usuarios')
-                        ->findOneBy(array('emailusuario'=>$data['email'],'tpusuario'=>'G','codigoprimeiroacesso'=>$data['codigo']));
-             
-              $this->logControle->log("validar: " . print_r($validarUusario, true));
-          
+            $validarUusario = $this->getDoctrine()
+                    ->getRepository('AppBundle:Usuarios')
+                    ->findOneBy(array('emailusuario' => $data['email'], 'tpusuario' => 'G', 'codigoprimeiroacesso' => $data['codigo']));
+
+            $this->logControle->log("validar: " . print_r($validarUusario, true));
+
 
             if (count($validarUusario) > 0) {
-           
-                    $date = new \DateTime();
 
-                    $validarUusario->setDtprimeiroacesso($date);
-                    $this->em->persist($validarUusario);
-                    $this->em->flush();
-                    $this->get('session')->set('primeiroAcesso', $data['email']);
-                    $retornoRequest = array(
-                        "sucesso" => true
-                    );
-                
+                $date = new \DateTime();
+
+                $validarUusario->setDtprimeiroacesso($date);
+                $this->em->persist($validarUusario);
+                $this->em->flush();
+                $this->get('session')->set('primeiroAcesso', $data['email']);
+                $retornoRequest = array(
+                    "sucesso" => true
+                );
+
                 // return $this->redirectToRoute('editarPerfil');
             } else {
                 $retornoRequest = array(

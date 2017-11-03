@@ -10,3 +10,4 @@ parameters:
     mailer_user: appamigosdarua
     mailer_password: amigosdarua
     secret: cf1b33611d10ef1243300d344a17ad9fa44b7222
+    key_sendgrid: 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

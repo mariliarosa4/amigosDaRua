@@ -37,8 +37,6 @@ class TelaPrincipalController extends Controller {
      */
     public function home() {
         $this->em = $this->getDoctrine()->getManager();
-
-
         $queryBuilderAcao = $this->em->createQueryBuilder();
         $queryBuilderAcao
                 ->select('a,g')
