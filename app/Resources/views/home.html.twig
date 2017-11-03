@@ -15,7 +15,7 @@
 
     </head>
     <body>
-       
+
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
@@ -29,12 +29,15 @@
                         <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
 
                             <div class="cards">
+                                {%if  acoes is empty%}
+                                    <h3> Não há ações para exibir</h3>
+                                {%endif%}
                                 {%for acaoArray in acoes%}
                                     <div class=" card [ is-collapsed ] ">
                                         <div class="mdl-card mdl-shadow--2dp">
                                             <div class="mdl-card__supporting-text">
                                                 <div class="card__inner [ js-expander ]">
-                                                    <div><span>NOME DA AÇÃO</span></div>
+                                                    <div><span>{{acaoArray.acao.nomeGrupo}}</span></div>
                                                     <br>
                                                     <div class="divDtHr"><i class="material-icons">date_range</i><span>{{acaoArray.acao.data}}</span></div>
                                                     <div class="divDtHr"><i class="material-icons">schedule</i><span>{{acaoArray.acao.hora}}</span></div>
@@ -45,7 +48,7 @@
                                             <div class="newCard">
                                                 <div class="card-info"> 
                                                     <div class="name">
-                                                        <p>Ação X</p>  <!-- Nome da ação -->
+                                                        <p>{{acaoArray.acao.nomeGrupo}}</p>  <!-- Nome da ação -->
                                                     </div>
                                                     <hr>
                                                     <div class="content">

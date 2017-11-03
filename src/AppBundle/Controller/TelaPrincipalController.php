@@ -49,7 +49,7 @@ class TelaPrincipalController extends Controller {
                 ->getQuery()
                 ->execute();
         $resultadoAcao = $queryBuilderAcao->getQuery()->getArrayResult();
-
+        $dadosAcao = array();
         foreach ($resultadoAcao as $acao) {
             $this->logControle->log("acoes : " . print_r($acao, true));
             $dadosAcao[$acao['idacao']]['acao'] = array(

@@ -124,7 +124,7 @@ class LoginController extends Controller {
 
 
             $this->em = $this->getDoctrine()->resetManager();
-            ;
+            
 
             $objetoUsuario = $this->em->getRepository('AppBundle:Usuarios')
                     ->findOneBy(array('emailusuario' => $data['email']));
@@ -162,7 +162,7 @@ class LoginController extends Controller {
 
         $message = (new \Swift_Message('Redefinir senha'))
                 ->setFrom('appamigosdarua@gmail.com')
-                ->setTo('mariliarosilva@gmail.com')
+                ->setTo($email)
                 ->setBody(
                 $this->renderView(
                         'Emails/email.html.twig', array('criptografia' => $criptografia, "nome" => $nome, "email" => $email)
