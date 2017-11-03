@@ -63,3 +63,8 @@ html, body{
   color: white;
   margin-top: -15px;
 }
+
+#mudarSenha{
+  visibility: hidden;
+  display: none;
+}
