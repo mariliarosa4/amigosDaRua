@@ -10,10 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <!-- <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/cadastroAtividade.css">
-        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/checkboxesAndRadioButtons.css"> -->
-        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/administrativo.css">
-        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/checkboxesAndRadioButtons.css">
+        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/cadastroAtividade.css">
+        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/checkboxesAndRadioButtons.css">
+        <!-- <link rel="stylesheet" type="text/css" href="../../../web/assets/css/administrativo.css">
+        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/checkboxesAndRadioButtons.css"> -->
 
     </head>
     <body>
@@ -58,7 +58,7 @@
                                             <div class="divLocais">
                                                 <i class="material-icons">email</i>
                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                  <input class="mdl-textfield__input" type="email" id="EmailResponsavel" required>
+                                                  <input class="mdl-textfield__input" type="email" id="EmailResponsavel" required onblur="validarEmail('{{web_dir}}')">
                                                   <label class="mdl-textfield__label" for="EmailResponsavel">E-mail do Responsável</label>
                                                 </div>
                                             </div>
@@ -84,7 +84,7 @@
                                     </form>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
-                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onclick="cadastrarGrupo('{{web_dir}}')">
                                         Gerar Código
                                     </a>
                                 </div>
@@ -94,5 +94,6 @@
                 </div>
             </main>
         </div>
+      <script src="{{files_dir}}assets/js/CadastroGrupos.js"></script>
     </body>
 </html>

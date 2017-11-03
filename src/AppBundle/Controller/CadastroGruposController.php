@@ -51,6 +51,15 @@ class CadastroGruposController extends Controller {
         return new JsonResponse($retornoRequest);
     }
 
+   
+    /**
+     * @Route("/admin")
+     */
+    public function adminAction(Request $request)
+    {
+        return $this->render('administrativo.html.twig');
+    }
+    
     /**
      * @Route("/cadastrarGrupo")
      */

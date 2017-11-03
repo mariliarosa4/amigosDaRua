@@ -6,11 +6,11 @@
 
 
 function validarEmail(caminho) {
-
-    var email = $('#email').val();
+   alert("entrou");
+     var emailResponsavel = $('#EmailResponsavel').val();
 
     var dataString = {
-        emailCadastro: email,
+        emailCadastro: emailResponsavel
     };
     console.log(JSON.stringify(dataString));
     $.ajax({
@@ -24,11 +24,54 @@ function validarEmail(caminho) {
         async: false,
         success: function (response) {
             console.log(response);
-          if(response.existe){
-              alert("email já cadastrado");
-          }else{
-              alert("email valido");
-          }
+            if (response.existe) {
+                alert("email já cadastrado");
+            } else {
+                alert("email valido");
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+
+        }
+
+    });
+
+    return false;
+}
+
+function cadastrarGrupo(caminho) {
+
+    var nomeResponsavel = $('#NomeResponsavel').val();
+    var telefoneResponsavel = $('#TelResponsavel').val();
+    var emailResponsavel = $('#EmailResponsavel').val();
+    var nomeGrupo = $('#NomeGrupo').val();
+    var integrantes = $('#Integrantes').val();
+
+    var dataString = {"emailResponsavel": emailResponsavel,
+         "nomeResponsavel": nomeResponsavel,
+        "dataNascimentoResponsavel": "2017-11-16",
+        "nomeGrupo": nomeGrupo,
+        "telefoneResponsavel": telefoneResponsavel,
+        "numeroIntegrantes": integrantes
+    }
+    console.log(JSON.stringify(dataString));
+    $.ajax({
+        type: 'post',
+        data: JSON.stringify(dataString),
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '' + caminho + 'cadastrarGrupo',
+        cache: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.log(response);
+            if (response.sucesso) {
+                alert("Grupo cadastrado com sucesso. O codigo de acesso foi enviado por email para o usuario.");
+            } else {
+                alert("Falha no cadastro. Tente novamente.");
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
