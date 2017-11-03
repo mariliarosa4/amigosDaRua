@@ -68,3 +68,8 @@ html, body{
     padding-left: 15px;
   }
 }
+
+#novasenha{
+  display: none;
+  visibility: hidden;
+}

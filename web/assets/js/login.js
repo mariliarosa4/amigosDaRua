@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -55,8 +55,9 @@ function primeiroacesso(caminho) {
             console.log(response);
             if (response.sucesso) {
                 alert('Primeiro acesso realizado com sucesso! Vamos cadastrar sua senha.');
-              
-               
+                document.getElementById("novaSenha").style.display="block";
+                document.getElementById("novaSenha").style.visibility="visible";
+
             }
 
         },
@@ -65,7 +66,7 @@ function primeiroacesso(caminho) {
         }
 
     });
-  
+
 }
 
 function novaSenha(caminho, email) {

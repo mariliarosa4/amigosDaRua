@@ -17,13 +17,6 @@ html, body{
     background: transparent; /* make scrollbar transparent */
 }
 
-
-#inputData, #inputHora{
-  width: 35%;
-}
-#iconHora{
-  margin-left: 15px;
-}
 .labelItens{
   font-size: 18px;
   position: relative;
@@ -40,18 +33,6 @@ html, body{
   color: #fff;
 }
 
-@media (max-width:550px) {
-  .demo-card-wide.mdl-card {
-    width: 100%;
-  }
-  #inputData, #inputHora{
-    width: 80%;
-  }
-  #iconHora{
-    margin-left: 0px;
-  }
-}
-
 @media (max-width:450px) {
   .demo-card-wide.mdl-card {
     width: 350px;
@@ -60,4 +41,25 @@ html, body{
     padding: 0px;
     margin-left: -10px;
   }
+}
+
+.mdl-textfield.is-invalid .mdl-textfield__input{
+  border-color: rgb(96,125,139);
+}
+.mdl-textfield--floating-label.is-invalid .mdl-textfield__label{
+  color: rgb(96,125,139);
+}
+#codigoGerado{
+  float: right;
+  color: #FBC02D;
+  margin-top: 5px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#backHome{
+  text-decoration: none;
+  color: white;
+  margin-top: -15px;
 }
