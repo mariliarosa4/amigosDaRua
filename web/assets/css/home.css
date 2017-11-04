@@ -34,7 +34,7 @@
   transition: all 0.3s ease-in-out;
 }
 .card__inner .material-icons {
-  width: 100%;
+  width: 20%;
   margin-top: .25em;
 }
 .card__expander {
@@ -195,7 +195,7 @@ body {
 
 .divDtHr{
   display: flex;
-  width: 50%;
+  width: 100%;
   margin-top: 15px;
 }
 .divDtHr span{

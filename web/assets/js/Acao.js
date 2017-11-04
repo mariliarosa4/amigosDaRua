@@ -7,7 +7,7 @@
 
 function salvarAcao(caminho, idAcao) {
 
-    var local = $('#local').val();
+    var local =$('.locais').map( function(){return $(this).val(); }).get();
     console.log(local);
     var data = $('#data').val();
     var hora = $('#hora').val();
@@ -17,6 +17,9 @@ function salvarAcao(caminho, idAcao) {
         selectedDoacoes.push($(ob).val());
     });
     console.debug(selectedDoacoes);
+    if (data!="" && hora!=""){
+        
+    
     var dataString = {
         local: local,
         data: data,
@@ -46,7 +49,74 @@ function salvarAcao(caminho, idAcao) {
         }
 
     });
+    }else{
+        alert("Data e hora não podem ficar em branco.");
+         
+    }
+    return false;
+}
 
+
+function atualizarAcao(caminho, idAcao, array) {
+//    var locais;
+//   
+// $(".locais").each( function () {
+//       alert( $(this).val() );
+//       alert($(this).attr('name'));
+//       if ($(this).attr('name')){
+//              var test = ['','Stackoverflow','stackoverflow.com'];
+//       }
+//     
+//
+//cString.push( test );
+//   });
+console.debug(array);
+      var local =$('.locais').map( function(){return $(this).val(); }).get();
+    console.log(local);
+    var data = $('#data').val();
+    var hora = $('#hora').val();
+    var detalhes = $('#detalhes').val();
+    var selectedDoacoes = [];
+    $(".input-list").find("input:checked").each(function (i, ob) {
+        selectedDoacoes.push($(ob).val());
+    });
+    console.debug(selectedDoacoes);
+    if (data!="" && hora!=""){
+        
+    
+    var dataString = {
+        local: local,
+        data: data,
+        hora: hora,
+        categorias: selectedDoacoes,
+        detalhes: detalhes,
+        idAcao: idAcao
+    };
+    console.log(JSON.stringify(dataString));
+    $.ajax({
+        type: 'post',
+        data: JSON.stringify(dataString),
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '' + caminho + 'atualizarAcao',
+        cache: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.log(response);
+            alert("Ação registrada com sucesso para o dia " + data + " as " + hora + " em " + local);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+
+        }
+
+    });
+    }else{
+        alert("Data e hora não podem ficar em branco.");
+         
+    }
     return false;
 }
 function initialize() {
@@ -59,7 +129,7 @@ function initialize() {
         autocomplete.inputId = acInputs[i].id;
 
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            document.getElementById("log").innerHTML = 'You used input with id ' + this.inputId;
+          
         });
     }
 }

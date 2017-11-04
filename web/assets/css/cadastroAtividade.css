@@ -1,6 +1,6 @@
 html, body{
   width: 100%;
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .material-icons{

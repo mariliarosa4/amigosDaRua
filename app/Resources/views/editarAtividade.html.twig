@@ -1,99 +1,137 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <meta charset="UTF-8"/>
-      <title>Editar atividade</title>
+        <meta charset="UTF-8"/>
+        <title>Adicionar atividade</title>
 
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-amber.min.css" />
-      <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-      <link rel="stylesheet" type="text/css" href="../../../web/assets/css/cadastroAtividade.css">
-      <link rel="stylesheet" type="text/css" href="../../../web/assets/css/checkboxesAndRadioButtons.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-amber.min.css" />
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/cadastroAtividade.css">
+        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/checkboxesAndRadioButtons.css">
 
     </head>
     <body>
-      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-          <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">Amigos da Rua</span>
 
-          </div>
-        </header>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">Amigos da Rua</span>
 
-        <main class="mdl-layout__content colunaCentro">
-          <div class="page-content">
-            <div class="mdl-grid" >
-              <div class="mdl-cell mdl-cell--8-col">
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                  <div class="mdl-card__supporting-text">
-                    <div class="mdl-card__title">
-                      <h2 class="mdl-card__title-text">Editar ação</h2>
-                    </div>
-                    <form action="#">
-                      <div class="divLocais">
-                          <i class="material-icons">location_on</i>
-                          <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="local">
-                            <label class="mdl-textfield__label" for="local">Local</label>
-                          </div>
-                      </div>
-
-                      <div class="divDiaHora">
-                          <i class="material-icons">date_range</i>
-                          <div class="mdl-textfield mdl-js-textfield" id="inputData">
-                            <input class="mdl-textfield__input" type="date" id="data">
-                          </div>
-
-                          <i class="material-icons" id="iconHora">schedule</i>
-                          <div class="mdl-textfield mdl-js-textfield" id="inputHora">
-                            <input class="mdl-textfield__input" type="time" id="hora">
-                          </div>
-                      </div>
-
-                      <div class="divItens">
-                        <div class="labelItens">Itens distribuídos:</div><br>
-                        <div class="mdl-textfield mdl-js-textfield">
-
-                          <div class="panel-body">
-                            <ul class="input-list">
-                              <li>
-                                <div class="pure-checkbox">
-                                    <input id="checkbox1" name="checkbox" type="checkbox">
-                                    <label for="checkbox1">Choice A</label>
-                                </div>
-                              </li>
-
-                              <li>
-                                <div class="pure-checkbox">
-                                    <input id="checkbox2" name="checkbox" type="checkbox">
-                                    <label for="checkbox2">Choice B</label>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                      </div>
-
-                      <div class="divDescricao">
-                          <span>Detalhes da atividade:</span><br>
-                          <div class="mdl-textfield mdl-js-textfield">
-                            <textarea class="mdl-textfield__input" type="text" rows= "3" id="detalhes" ></textarea>
-                            <label class="mdl-textfield__label" for="detalhes">Detalhes da atividade (opcional)</label>
-                          </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                      Salvar
-                    </a>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-  </body>
+            </header>
+
+            <main class="mdl-layout__content colunaCentro">
+                <div class="page-content">
+                    <div class="mdl-grid" >
+                        <div class="mdl-cell mdl-cell--8-col">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__supporting-text">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Adicionar ação</h2>
+                                    </div>
+                                    <form action="#">
+                                        <div id="locais">
+                                            {%if acaoEdicao.endereco is defined %}
+                                                {%for arrayEndereco in acaoEdicao.endereco%}
+
+                                                    <div class="divLocais">
+                                                        <i class="material-icons">location_on</i>
+                                                        <div class="mdl-textfield mdl-js-textfield">
+                                                            <input class="mdl-textfield__input locais" type="text" name="{{arrayEndereco.idEndereco}}" id="local" value="{{arrayEndereco.endereco}}">
+                                                            <label class="mdl-textfield__label" for="local">Local</label>
+                                                        </div>
+                                                        <i class="material-icons addLocal" onclick="addLocal();">add_circle_outline</i>
+                                                         <i class="material-icons " onclick="excluirLocal(this);">delete</i>
+                                                    </div>
+                                                {%endfor%}
+                                            {%else%}
+                                                <div class="divLocais">
+                                                    <i class="material-icons">location_on</i>
+                                                    <div class="mdl-textfield mdl-js-textfield">
+                                                        <input class="mdl-textfield__input locais" type="text" id="local" value="">
+                                                        <label class="mdl-textfield__label" for="local">Local</label>
+                                                    </div>
+                                                    <i class="material-icons addLocal" onclick="addLocal();">add_circle_outline</i>
+                                                </div>
+                                            {%endif%}
+
+                                        </div>
+{{dump(acaoEdicao)}}
+                                        <div class="divDiaHora">
+                                            <i class="material-icons">date_range</i>
+                                            <div class="mdl-textfield mdl-js-textfield" id="inputData">
+                                                <input class="mdl-textfield__input" type="date" id="data" value="{%if acaoEdicao.acao.data is defined %}{{acaoEdicao.acao.data}}{%endif%}" required>
+                                            </div>
+
+                                            <i class="material-icons" id="iconHora">schedule</i>
+                                            <div class="mdl-textfield mdl-js-textfield" id="inputHora">
+                                                <input class="mdl-textfield__input" type="time" id="hora" value="{%if acaoEdicao.acao.hora is defined %}{{acaoEdicao.acao.hora}}{%endif%}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="divItens">
+                                            <div class="labelItens">Doações da ação:</div><br>
+                                            <div class="mdl-textfield mdl-js-textfield">
+
+                                                <div class="panel-body">
+                                                    <ul class="input-list">
+                                                        {%for  opcao in opcoesDoacoes%}
+
+                                                            <li>
+                                                                <div class="pure-checkbox">
+                                                                    <input id="{{opcao.idCategoria}}" name="checkbox" type="checkbox" value="{{opcao.idCategoria}}" {%if acaoEdicao.categoriasChecked is defined and opcao.idCategoria in acaoEdicao.categoriasChecked|keys %}checked{%endif%}>
+                                                                    <label for="{{opcao.idCategoria}}">{{opcao.subcategoria}}</label>
+                                                                </div>
+                                                            </li>
+
+                                                        {%endfor%}
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="divDescricao">
+                                                <span>Detalhes da atividade:</span><br>
+                                                <div class="mdl-textfield mdl-js-textfield">
+                                                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="detalhes" value="{%if acaoEdicao.acao.descricao is defined %}{{acaoEdicao.acao.descricao}}{%endif%}"></textarea>
+                                                    <label class="mdl-textfield__label" for="detalhes">Detalhes da atividade (opcional)</label>
+                                                </div>
+                                            </div>
+                                    </form>
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="atualizarAcao('{{web_dir}}', '{{idAcao}}');">
+                                        Salvar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ81OQZWchWDs02c2A5tXiyR181yh2ZFc&libraries=places"></script>
+        <script src="{{files_dir}}assets/js/Acao.js"></script>
+        <script type="text/javascript">
+
+
+                                        function addLocal() {
+                                            var inputLocal = document.getElementsByClassName("divLocais")[0];
+                                            var clone = inputLocal.cloneNode(true);
+
+                                            document.getElementById("locais").appendChild(clone);
+                                            $("#local").last().val('');
+                                            initialize();
+                                        }
+                                        
+                                        function excluirLocal(elemento){
+                                           $(elemento).parent().remove();
+                                        }
+                                        initialize();
+        </script>
+
+    </body>
 </html>
