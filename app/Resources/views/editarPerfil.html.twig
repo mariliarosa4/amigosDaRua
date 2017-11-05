@@ -10,10 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <!-- <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/cadastroAtividade.css">
-        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/checkboxesAndRadioButtons.css"> -->
-        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/administrativo.css">
-        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/checkboxesAndRadioButtons.css">
+        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/cadastroAtividade.css">
+        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/checkboxesAndRadioButtons.css">
+        <!-- <link rel="stylesheet" type="text/css" href="../../../web/assets/css/administrativo.css">
+        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/checkboxesAndRadioButtons.css"> -->
 
     </head>
     <body>
@@ -40,7 +40,7 @@
                                           <div class="divLocais">
                                               <i class="material-icons">person</i>
                                               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="text" id="NomeResponsavel" required>
+                                                <input class="mdl-textfield__input" type="text" id="NomeResponsavel" required value="{%if dadosPerfil.nmusuario is not empty %}{{dadosPerfil.nmusuario}}{%endif%}">
                                                 <label class="mdl-textfield__label" for="NomeResponsavel">Nome do Responsável</label>
                                               </div>
                                           </div>
@@ -49,7 +49,7 @@
                                           <div class="divLocais">
                                               <i class="material-icons">phone</i>
                                               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="tel" id="TelResponsavel" required>
+                                                <input class="mdl-textfield__input" type="tel" id="TelResponsavel" required value="{%if dadosPerfil.telefoneresponsavel is not empty %}{{dadosPerfil.telefoneresponsavel}}{%endif%}">
                                                 <label class="mdl-textfield__label" for="TelResponsavel">Telefone do Responsável</label>
                                               </div>
                                           </div>
@@ -58,7 +58,7 @@
                                           <div class="divLocais">
                                               <i class="material-icons">date_range</i>
                                               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="date" id="Nascimento" required>
+                                                <input class="mdl-textfield__input" type="date" id="Nascimento" required  value="{%if dadosPerfil.dtnascimento is not empty %}{{dadosPerfil.dtnascimento}}{%endif%}">
                                                 <span><br>Data de nascimento</span>
                                               </div>
                                           </div>
@@ -67,7 +67,7 @@
                                           <div class="divLocais">
                                               <i class="material-icons">group_add</i>
                                               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="number" id="Integrantes" style="border-color:rgb(96,125,139)">
+                                                <input class="mdl-textfield__input" type="number" id="Integrantes" style="border-color:rgb(96,125,139)"  value="{%if dadosPerfil.numerointegrantes is not empty %}{{dadosPerfil.numerointegrantes}}{%endif%}">
                                                 <label class="mdl-textfield__label" for="Integrantes" style="color:rgb(96,125,139)">Número de Integrantes</label>
                                               </div>
                                           </div>
@@ -77,12 +77,12 @@
                                             <div class="divLocais">
                                                 <i class="material-icons">group</i>
                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                  <input class="mdl-textfield__input" type="text" id="NomeGrupo" required>
+                                                  <input class="mdl-textfield__input" type="text" id="NomeGrupo" required value="{%if dadosPerfil.nomegrupo is not empty %}{{dadosPerfil.nomegrupo}}{%endif%}">
                                                   <label class="mdl-textfield__label" for="NomeGrupo">Nome do Grupo</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="mudarSenha">
+                                        <div id="mudarSenha" style="display:none;">
                                           <div id="locais">
                                               <div class="divLocais">
                                                   <i class="material-icons">lock</i>
@@ -114,7 +114,7 @@
                                     </form>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
-                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick="salvarEdicaoPerfil('{{web_dir}}');">
                                         Salvar
                                     </a>
                                     <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onclick="alterarSenha();">
@@ -131,7 +131,9 @@
 </html>
 <script>
   function alterarSenha(){
-    document.getElementById("mudarSenha").style.visibility="visible";
-    document.getElementById("mudarSenha").style.display="block";
+     
+    $('#mudarSenha').toggle();
   }
 </script>
+
+  <script src="{{files_dir}}assets/js/Perfil.js"></script>
