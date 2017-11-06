@@ -1,0 +1,44 @@
+label{
+  font-size: 18px;
+}
+.pure-radiobutton{
+  margin: 15px;
+}
+.demo-card-wide.mdl-card {
+  width: 512px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+@media (max-width:550px) {
+  .demo-card-wide.mdl-card {
+    width: 100%;
+  }
+}
+
+@media (max-width:450px) {
+  .demo-card-wide.mdl-card {
+    width: 350px;
+  }
+  .mdl-grid{
+    padding: 0px;
+    margin-left: -10px;
+  }
+}
+
+#datas{
+  /*display: none;*/
+}
+#dtInicial .material-icons, #dtFinal .material-icons{
+  margin-left: 14px;
+  margin-right: 10px;
+}
+#inputDtInicial, #inputDtFinal{
+  margin-left: 20px;
+  width: 35%;
+}

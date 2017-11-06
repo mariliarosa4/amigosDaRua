@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-amber.min.css" />
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/filtros.css">
+        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/checkboxesAndRadioButtons.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+      <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__supporting-text">
+              <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text">Filtros</h2>
+              </div>
+              <form action="#">
+                    <div class="panel-body">
+                        <ul class="input-list">
+                          <li>
+                            <div class="pure-radiobutton">
+                                <input id="H" name="radio" type="radio" value="Hoje">
+                                <label for="H">Hoje</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="pure-radiobutton">
+                                <input id="S" name="radio" type="radio" value="ProximaSemana">
+                                <label for="S">Próxima Semana</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="pure-radiobutton">
+                                <input id="I" name="radio" type="radio" value="Intervalo">
+                                <label for="I">Escolher intervalo</label>
+                            </div>
+                          </li>
+                        </ul>
+                        <div id="datas">
+                          <div id="dtInicial"><i class="material-icons">today</i>
+                            <label>Data Inicial</label>
+                            <div class="mdl-textfield mdl-js-textfield" id="inputDtInicial">
+                                <input class="mdl-textfield__input" type="date" id="pickerDtInicio">
+                            </div>
+                          </div>
+                          <div id="dtFinal">
+                            <i class="material-icons">event</i>
+                            <label> Data Final</label>
+                            <div class="mdl-textfield mdl-js-textfield" id="inputDtFinal">
+                                <input class="mdl-textfield__input" type="date" id="pickerDtFim">
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+              </form>
+          </div>
+
+          <div class="mdl-card__actions mdl-card--border">
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                  Aplicar
+              </a>
+          </div>
+      </div>
+    </body>
+</html>
+<script>
+$(document).ready(function() {
+  $('input[type=radio][value=Intervalo]').change(function() {
+      $("#datas").show();
+  });
+  $('input[type=radio][value=Hoje]').change(function() {
+      $("#datas").hide();
+
+      var now = new Date();
+      var day = ("0" + now.getDate()).slice(-2);
+      var month = ("0" + (now.getMonth() + 1)).slice(-2);
+      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+      $('#pickerDtInicio').val(today);
+      $('#pickerDtFim').val(today);
+  });
+  $('input[type=radio][value=ProximaSemana]').change(function() {
+      $("#datas").hide();
+      var dI = new Date();
+      var dF = new Date();
+      dI.setDate(dI.getDate() + (7 - dI.getDay()) % 7);
+      dF.setDate(dI.getDate() + 7);
+
+      var day = ("0" + dI.getDate()).slice(-2);
+      var month = ("0" + (dI.getMonth() + 1)).slice(-2);
+      var today = dI.getFullYear()+"-"+(month)+"-"+(day) ;
+      $('#pickerDtInicio').val(today);
+
+      day = ("0" + dF.getDate()).slice(-2);
+      month = ("0" + (dF.getMonth() + 1)).slice(-2);
+      today = dF.getFullYear()+"-"+(month)+"-"+(day) ;
+      $('#pickerDtFim').val(today);
+  });
+});
+</script>
