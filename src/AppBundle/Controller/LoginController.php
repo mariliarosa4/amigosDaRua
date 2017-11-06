@@ -70,17 +70,15 @@ class LoginController extends Controller {
                 $queryBuilderGrupo = $queryBuilderGrupo->getQuery()->getArrayResult();
 
                 $this->logControle->log("grupoAutenticado : " . print_r($queryBuilderGrupo, true));
-                if ($queryBuilderGrupo[0]['idusuario']['tpusuario'] == 'G') {
+                if (count($queryBuilderGrupo) > 0) {
+
                     $this->get('session')->set('idGrupo', $queryBuilderGrupo[0]['idgrupos']);
-                     return $this->redirectToRoute('home');
+                    return $this->redirectToRoute('home');
                 } else {
-                   
-                        $this->get('session')->set('admin', $queryBuilderGrupo[0]['idusuario']['idusuario']);
-                        return $this->redirectToRoute('admin');
-                   
-                       
+                    
+                    $this->get('session')->set('admin', $this->get('session')->get('idUser'));
+                    return $this->redirectToRoute('admin');
                 }
-               
             } else {
                 return $this->render('login.html.twig', array(
                             'form' => $this->formUserLogin->createView(), 'erro' => $this->error
@@ -242,7 +240,7 @@ class LoginController extends Controller {
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-                   $senha = hash('sha256', $data['confirmaSenha']);
+                $senha = hash('sha256', $data['confirmaSenha']);
                 $objetoUsuario->setSenhausuario($senha);
                 $this->em->persist($objetoUsuario);
                 $this->em->flush();
