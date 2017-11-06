@@ -27,39 +27,44 @@ class CadastroGruposController extends Controller {
      * @Route("/validarEmail")
      */
     public function validarEmailAction(Request $request) {
-        $this->em = $this->getDoctrine()->getManager();
-        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-            $data = json_decode($request->getContent(), true);
-            $request->request->replace(is_array($data) ? $data : array());
+        if (!$this->get('session')->get('admin')) {
 
-            $this->logControle->log("validar email existente: " . print_r($data, true));
-            $verificarEmailExistente = $this->getDoctrine()
-                    ->getRepository('AppBundle:Usuarios')
-                    ->findBy(array('emailusuario' => $data['emailCadastro']));
-            if ($verificarEmailExistente) {
+            return $this->redirectToRoute('login');
+        } else {
+            $this->em = $this->getDoctrine()->getManager();
+            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+                $data = json_decode($request->getContent(), true);
+                $request->request->replace(is_array($data) ? $data : array());
 
-                $retornoRequest = array(
-                    "existe" => true
-                );
-            } else {
-                $retornoRequest = array(
-                    "existe" => false
-                );
+                $this->logControle->log("validar email existente: " . print_r($data, true));
+                $verificarEmailExistente = $this->getDoctrine()
+                        ->getRepository('AppBundle:Usuarios')
+                        ->findBy(array('emailusuario' => $data['emailCadastro']));
+                if ($verificarEmailExistente) {
+
+                    $retornoRequest = array(
+                        "existe" => true
+                    );
+                } else {
+                    $retornoRequest = array(
+                        "existe" => false
+                    );
+                }
             }
+            $this->logControle->log("retorno request : " . print_r($retornoRequest, true));
+            return new JsonResponse($retornoRequest);
         }
-        $this->logControle->log("retorno request : " . print_r($retornoRequest, true));
-        return new JsonResponse($retornoRequest);
     }
 
-   
     /**
      * @Route("/admin")
      */
-    public function adminAction(Request $request)
-    {
-        return $this->render('administrativo.html.twig');
+    public function adminAction(Request $request) {
+       
+            return $this->render('administrativo.html.twig');
+        
     }
-    
+
     /**
      * @Route("/cadastrarGrupo")
      */
@@ -89,7 +94,7 @@ class CadastroGruposController extends Controller {
                     $objetoGrupo->setNumerointegrantes($data['numeroIntegrantes']);
                 }
                 $objetoGrupo->setIdusuario($objetoUsuario);
-                $this->em->persist($objetoUsuario);
+             
                 $this->em->persist($objetoGrupo);
 
                 $codigo = $this->gerarCodigoAcesso($dataNascimentoFormatada, $data['nomeGrupo']);
@@ -118,12 +123,12 @@ class CadastroGruposController extends Controller {
 
     public function gerarCodigoAcesso($dtNascimento, $nomeGrupo) {
         $this->logControle->log("dt : " . print_r($dtNascimento, true));
-        $hashCodigo = substr(md5($dtNascimento->date.$nomeGrupo), 0, 8);
+        $hashCodigo = substr(md5($dtNascimento->date . $nomeGrupo), 0, 8);
         return $hashCodigo;
     }
 
     public function enviarEmailCodigo($hashCodigo, $email, $nome) {
-
+        $this->logControle->log("enviando email");
         $from = new SendGrid\Email("appamigosdarua", "appamigosdarua@gmail.com");
         $subject = "primeiro acesso amigos da rua";
         $to = new SendGrid\Email(null, $email);

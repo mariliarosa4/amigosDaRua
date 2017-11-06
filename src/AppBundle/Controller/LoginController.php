@@ -69,10 +69,18 @@ class LoginController extends Controller {
                         ->execute();
                 $queryBuilderGrupo = $queryBuilderGrupo->getQuery()->getArrayResult();
 
-
                 $this->logControle->log("grupoAutenticado : " . print_r($queryBuilderGrupo, true));
-                $this->get('session')->set('idGrupo', $queryBuilderGrupo[0]['idgrupos']);
-                return $this->redirectToRoute('home');
+                if ($queryBuilderGrupo[0]['idusuario']['tpusuario'] == 'G') {
+                    $this->get('session')->set('idGrupo', $queryBuilderGrupo[0]['idgrupos']);
+                     return $this->redirectToRoute('home');
+                } else {
+                   
+                        $this->get('session')->set('admin', $queryBuilderGrupo[0]['idusuario']['idusuario']);
+                        return $this->redirectToRoute('admin');
+                   
+                       
+                }
+               
             } else {
                 return $this->render('login.html.twig', array(
                             'form' => $this->formUserLogin->createView(), 'erro' => $this->error
@@ -84,9 +92,9 @@ class LoginController extends Controller {
         ));
     }
 
-    public function autenticacao($email, $senha) {
+    public function autenticacao($email, $senha2) {
 
-         $senha = hash('sha256', $senha);
+        $senha = hash('sha256', $senha2);
         $usuarioAutenticado = $this->getDoctrine()
                 ->getRepository('AppBundle:Usuarios')
                 ->findBy(array('emailusuario' => $email, 'senhausuario' => $senha));
@@ -139,12 +147,11 @@ class LoginController extends Controller {
                 $retornoRequest = array(
                     "sucesso" => true
                 );
-        }else{
-            $retornoRequest = array(
-                "emailNaoCadastrado" => true
-            );
-        }
-        
+            } else {
+                $retornoRequest = array(
+                    "emailNaoCadastrado" => true
+                );
+            }
         } else {
             $retornoRequest = array(
                 "sucesso" => false
@@ -235,7 +242,8 @@ class LoginController extends Controller {
                     ->findOneBy(array('emailusuario' => $data['email']));
             $this->logControle->log(print_r($objetoUsuario, true));
             if ($objetoUsuario != null) {
-                $objetoUsuario->setSenhausuario($data['confirmaSenha']);
+                   $senha = hash('sha256', $data['confirmaSenha']);
+                $objetoUsuario->setSenhausuario($senha);
                 $this->em->persist($objetoUsuario);
                 $this->em->flush();
             }
