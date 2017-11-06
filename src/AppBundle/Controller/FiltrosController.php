@@ -99,7 +99,7 @@ class FiltrosController extends Controller {
         }
         $this->logControle->log("acoes filtradas : " . print_r($dadosAcao, true));
 
-        return $this->render('filtradas.html.twig', array('acoes' => $dadosAcao, 'inicio'=>$inicio, 'fim'=>$fim));
+        return $this->render('filtradas.html.twig', array('acoes' => $dadosAcao, 'inicio'=>$from->format('d-m-Y'), 'fim'=>$to->format('d-m-Y')));
     }
 
     /**

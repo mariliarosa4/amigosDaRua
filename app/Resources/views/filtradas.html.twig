@@ -19,7 +19,7 @@
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
-                  <a href="{{web_dir}}home" id="backHome"> <i class="material-icons">arrow_back</i></a>
+                    <a href="{{web_dir}}home" id="backHome"> <i class="material-icons">arrow_back</i></a>
                     <span class="mdl-layout-title">Amigos da Rua</span>
                 </div>
             </header>
@@ -28,7 +28,11 @@
                 <div class="page-content">
                     <div class="mdl-grid" >
                         <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
-
+                            {%if inicio != fim%}
+                                <h3> Ações entre os dias {{inicio}} e {{fim}} </h3>
+                            {%else%}
+                                <h3> Ações a partir do dia  {{inicio}} </h3>
+                            {%endif%}
                             <div class="cards">
                                 {%if  acoes is empty%}
                                     <h3> Não há ações para exibir</h3>
