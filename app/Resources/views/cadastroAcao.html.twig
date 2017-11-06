@@ -41,6 +41,7 @@
                                                     <label class="mdl-textfield__label" for="local">Local</label>
                                                 </div>
                                                 <i class="material-icons addLocal" onclick="addLocal();">add_circle_outline</i>
+                                             <i class="material-icons " onclick="excluirLocal(this);">delete</i>
                                             </div>
                                         </div>
 
@@ -110,6 +111,9 @@
                                             initialize();
                                         }
                                         initialize();
+                                        function excluirLocal(elemento) {
+                                            $(elemento).parent().remove();
+                                        }
         </script>
 
     </body>

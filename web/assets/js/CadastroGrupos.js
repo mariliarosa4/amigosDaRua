@@ -6,8 +6,8 @@
 
 
 function validarEmail(caminho) {
-   alert("entrou");
-     var emailResponsavel = $('#EmailResponsavel').val();
+
+    var emailResponsavel = $('#EmailResponsavel').val();
 
     var dataString = {
         emailCadastro: emailResponsavel
@@ -23,13 +23,14 @@ function validarEmail(caminho) {
         processData: false,
         async: false,
         success: function (response) {
-            console.log(response);
+
             if (response.existe) {
                 alert("email já cadastrado");
-            } else {
-                alert("email valido");
-            }
-            setTimeout(function() { document.getElementById("EmailResponsavel").focus(); }, 1); 
+                setTimeout(function () {
+                    document.getElementById("EmailResponsavel").focus();
+                }, 1);
+            } 
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -47,15 +48,17 @@ function cadastrarGrupo(caminho) {
     var telefoneResponsavel = $('#TelResponsavel').val();
     var emailResponsavel = $('#EmailResponsavel').val();
     var nomeGrupo = $('#NomeGrupo').val();
+    var data = $('#Nascimento').val();
+
     var integrantes = $('#Integrantes').val();
 
     var dataString = {"emailResponsavel": emailResponsavel,
-         "nomeResponsavel": nomeResponsavel,
-        "dataNascimentoResponsavel": "2017-11-16",
+        "nomeResponsavel": nomeResponsavel,
+        "dataNascimentoResponsavel": data,
         "nomeGrupo": nomeGrupo,
         "telefoneResponsavel": telefoneResponsavel,
         "numeroIntegrantes": integrantes
-    }
+    };
     console.log(JSON.stringify(dataString));
     $.ajax({
         type: 'post',
