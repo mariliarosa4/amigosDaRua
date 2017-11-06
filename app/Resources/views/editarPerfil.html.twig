@@ -117,8 +117,47 @@
                                     <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick="salvarEdicaoPerfil('{{web_dir}}');">
                                         Salvar
                                     </a>
-                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onclick="alterarSenha();">
-                                        Alterar senha
+                                </div>
+                            </div>
+
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="margin-top: 20px;"> 
+                                <div class="mdl-card__supporting-text">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Alterar senha</h2>
+                                    </div>
+                                    <form action="#">
+                                        <div id="locais">
+                                            <div class="divLocais">
+                                                <i class="material-icons">lock</i>
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                  <input class="mdl-textfield__input" type="password" id="senha" required>
+                                                  <label class="mdl-textfield__label" for="senha">Insira sua senha</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="locais">
+                                            <div class="divLocais">
+                                                <i class="material-icons">lock_open</i>
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                  <input class="mdl-textfield__input" type="password" id="novaSenha" required>
+                                                  <label class="mdl-textfield__label" for="novaSenha">Nova Senha</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="locais">
+                                            <div class="divLocais">
+                                                <i class="material-icons">lock_outline</i>
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                  <input class="mdl-textfield__input" type="password" id="confirmarSenha" required>
+                                                  <label class="mdl-textfield__label" for="confirmarSenha">Confirmar Senha</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick="salvarEdicaoPerfil('{{web_dir}}');">
+                                        Salvar
                                     </a>
                                 </div>
                             </div>
@@ -131,7 +170,7 @@
 </html>
 <script>
   function alterarSenha(){
-     
+
     $('#mudarSenha').toggle();
   }
 </script>
