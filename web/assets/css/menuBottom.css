@@ -1,8 +1,22 @@
 .menuBottom{
   width: 100%;
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
 }
 .menuBottom *{
   margin: auto;
+}
+i{
+  color: white;
+}
+.menuBottom {
+ width:100%;
+ text-align:center;
+}
+.menuBottom > a {
+ display: inline-block;
+ vertical-align: top;
+ text-align:center;
+ margin:2%;
+ padding:15px;
 }

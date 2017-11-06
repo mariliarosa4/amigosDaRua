@@ -77,10 +77,22 @@
                   </div>
                     <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" value="Entrar" onclick='primeiroacesso("{{web_dir}}");'>
 
-                    <a href="{{web_dir}}registrarSenha" id="novasenha"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Cadastrar Senha</a>
+                    <a href="{{web_dir}}registrarSenha" id="novaSenha"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Cadastrar Senha</a>
 
                 </form>
             </div>
+        </div>
+        
+        <div class="mdl-dialog mensagemSistema">
+          <h4 class="mdl-dialog__title" id="TituloMensagem">Titulo</h4>
+          <div class="mdl-dialog__content">
+            <p id="MensagemExibida">
+              Mensagem
+            </p>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button" id="botaoMensagemSistema" onclick="$('.mensagemSistema').hide();">Ok</button>
+          </div>
         </div>
     </body>
 </html>

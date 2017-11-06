@@ -24,10 +24,12 @@ function esquecerSenha(caminho) {
         success: function (response) {
             console.log(response);
             if (response.sucesso) {
-                alert("Email enviado com sucesso!");//melhorar a forma de exibir esse aviso
+                mensagemSistema("Sucesso!", "Email enviado com sucesso!");
+                // alert("Email enviado com sucesso!");//melhorar a forma de exibir esse aviso
             }
             if (response.emailNaoCadastrado) {
-                alert("Email incorreto!");//melhorar a forma de exibir esse aviso
+                // alert("Email incorreto!");//melhorar a forma de exibir esse aviso
+                mensagemSistema("Erro", "Email incorreto!");
             }
 
 
@@ -96,18 +98,14 @@ function novaSenha(caminho, email) {
             success: function (response) {
                 console.log(response);
                 //melhorar a forma de exibir esse aviso
-                if (window.confirm('Senha atualizada com sucesso! Va para a pagina de login.'))
-                {
+                doument.getElementById("botaoMensagemSistema").onclick = window.location.href = caminho + 'login';
+                mensagemSistema("Sucesso!", "Senha atualizada com sucesso! Va para a pagina de login.");
 
-                    window.location.href = caminho + 'login';
-                } else
-                {
-                    die();
-                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
-                alert("Falha na atualização da senha.");//melhorar a forma de exibir esse aviso
+                // alert("Falha na atualização da senha.");//melhorar a forma de exibir esse aviso
+                mensagemSistema("Erro", "Falha na atualização da senha.");
             }
 
         });
@@ -115,4 +113,10 @@ function novaSenha(caminho, email) {
         alert("senhas nao conferem");//melhorar a forma de exibir isso
     }
     return false;
+}
+
+function mensagemSistema(titulo, mensagem){
+  $("#TituloMensagem").html(titulo);
+  $("#MensagemExibida").html(mensagem);
+  $(".mensagemSistema").show();
 }

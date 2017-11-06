@@ -32,7 +32,7 @@ label{
 }
 
 #datas{
-  /*display: none;*/
+  display: none;
 }
 #dtInicial .material-icons, #dtFinal .material-icons{
   margin-left: 14px;
