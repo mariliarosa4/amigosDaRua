@@ -133,8 +133,8 @@ class PerfilController extends Controller {
                 $senhaBanco = $dadosGrupoUsuario[0]->getIdusuario()->getSenhausuario();
                 if ($senhaBanco == $data['S']) {
 
-                    $senhaNova = hash('sha256', $data['CS']);
-                    $senhaBanco = $dadosGrupoUsuario[0]->getIdusuario()->setSenhausuario($senhaNova);
+                   
+                    $senhaBanco = $dadosGrupoUsuario[0]->getIdusuario()->setSenhausuario($data['CS']);
 
                     $this->em->persist($dadosGrupoUsuario[0]);
                     $this->em->flush();
