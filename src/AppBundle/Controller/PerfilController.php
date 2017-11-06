@@ -103,7 +103,61 @@ class PerfilController extends Controller {
             );
         }
         return new JsonResponse($retornoRequest);
-        // return $this->redirectToRoute('login');
+    }
+
+    /**
+     * @Route("/alterarSenha")
+     */
+    public function alterarSenhaAction(Request $request) {
+        $this->em = $this->getDoctrine()->getManager();
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+
+            $this->logControle->log("atualizar senha : " . print_r($data, true));
+            try {
+
+                $queryBuilderGrupo = $this->em->createQueryBuilder();
+                $queryBuilderGrupo
+                        ->select('u,g')
+                        ->from('AppBundle:Grupos', 'g')
+                        ->innerJoin('g.idusuario', 'u', 'WITH', 'u.idusuario= g.idusuario')
+                        ->where($queryBuilderGrupo->expr()->eq('g.idgrupos', $this->get('session')->get('idGrupo')))
+                        ->andWhere($queryBuilderGrupo->expr()->eq('u.tpusuario', "'G'"))
+                        ->getQuery()
+                        ->execute();
+                $dadosGrupoUsuario = $queryBuilderGrupo->getQuery()->getResult();
+                $this->logControle->log("dados : " . print_r($dadosGrupoUsuario[0], true));
+
+
+                $senhaBanco = $dadosGrupoUsuario[0]->getIdusuario()->getSenhausuario();
+                if ($senhaBanco == $data['S']) {
+
+                   
+                    $senhaBanco = $dadosGrupoUsuario[0]->getIdusuario()->setSenhausuario($data['CS']);
+
+                    $this->em->persist($dadosGrupoUsuario[0]);
+                    $this->em->flush();
+                    $this->logControle->log("dados grupo usuario : " . print_r($dadosGrupoUsuario, true));
+                    $retornoRequest = array(
+                        "sucesso" => true
+                    );
+                } else {
+                    $retornoRequest = array(
+                        "senhaAtualIncorreta" => true
+                    );
+                }
+            } catch (\Exception $e) {
+                $retornoRequest = array(
+                    "sucesso" => false
+                );
+            }
+        } else {
+            $retornoRequest = array(
+                "sucesso" => false
+            );
+        }
+        return new JsonResponse($retornoRequest);
     }
 
 }

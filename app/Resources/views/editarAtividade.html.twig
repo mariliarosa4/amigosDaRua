@@ -44,7 +44,7 @@
                                                             <label class="mdl-textfield__label" for="local">Local</label>
                                                         </div>
                                                         <i class="material-icons addLocal" onclick="addLocal();">add_circle_outline</i>
-                                                         <i class="material-icons " onclick="excluirLocal(this);">delete</i>
+                                                        <i class="material-icons " onclick="excluirLocal(this);">delete</i>
                                                     </div>
                                                 {%endfor%}
                                             {%else%}
@@ -59,7 +59,7 @@
                                             {%endif%}
 
                                         </div>
-{{dump(acaoEdicao)}}
+
                                         <div class="divDiaHora">
                                             <i class="material-icons">date_range</i>
                                             <div class="mdl-textfield mdl-js-textfield" id="inputData">
@@ -113,7 +113,7 @@
             </main>
         </div>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ81OQZWchWDs02c2A5tXiyR181yh2ZFc&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADj2NpKWn35gCcjfEBFpd-bq51RlKSv7Y&libraries=places"></script>
         <script src="{{files_dir}}assets/js/Acao.js"></script>
         <script type="text/javascript">
 
@@ -126,9 +126,9 @@
                                             $("#local").last().val('');
                                             initialize();
                                         }
-                                        
-                                        function excluirLocal(elemento){
-                                           $(elemento).parent().remove();
+
+                                        function excluirLocal(elemento) {
+                                            $(elemento).parent().remove();
                                         }
                                         initialize();
         </script>

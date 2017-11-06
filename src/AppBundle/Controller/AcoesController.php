@@ -367,7 +367,7 @@ class AcoesController extends Controller {
             }
         }
         $this->logControle->log("acoes do grupo : " . print_r($dadosAcao, true));
-        return $this->render('home.html.twig', array('acoes' => $dadosAcao));
+        return $this->render('minhasAcoes.html.twig', array('acoes' => $dadosAcao));
     }
 
 }
