@@ -9,8 +9,8 @@
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/home.css"> -->
-        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/home.css">
+        <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/home.css">
+        <!--<link rel="stylesheet" type="text/css" href="../../../web/assets/css/home.css"> -->
 
 
 
@@ -32,56 +32,74 @@
                         <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
 
                             <div class="cards">
-                                <div class=" card [ is-collapsed ] ">
-                                    <div class="mdl-card mdl-shadow--2dp">
-                                        <div class="mdl-card__supporting-text">
-                                            <div class="card__inner [ js-expander ]">
-                                                <div><span>Grupo A</span></div>
-                                                <br>
-                                                <div class="divDtHr"><i class="material-icons">date_range</i><span>22/05/17</span></div>
-                                                <div class="divDtHr"><i class="material-icons">schedule</i><span>13:00</span></div>
+                                {%if  acoes is empty%}
+                                    <h3> Não há ações para exibir</h3>
+                                {%endif%}
+                              
+                                {%for key,acaoArray in acoes%}
+                                   
+                                    <div class=" card [ is-collapsed ] ">
+                                        <div class="mdl-card mdl-shadow--2dp">
+                                            <div class="mdl-card__supporting-text">
+                                                <div class="card__inner [ js-expander ]">
+                                                    <div><span>{{acaoArray.acao.nomeGrupo}}</span></div>
+                                                    <br>
+                                                    <div class="divDtHr"><i class="material-icons">date_range</i><span>{{acaoArray.acao.data}}</span></div>
+                                                    <div class="divDtHr"><i class="material-icons">schedule</i><span>{{acaoArray.acao.hora}}</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card__expander">
+                                            <div class="newCard">
+                                                <div class="card-info">
+                                                    <div class="name">
+                                                        <p>{{acaoArray.acao.nomeGrupo}}</p>  <!-- Nome da ação -->
+                                                    </div>
+                                                    <hr>
+                                                    <div class="content">
+                                                        <p><b>Grupo:</b><br>{{acaoArray.acao.nomeGrupo}}</p>
+
+                                                        <p><b>Local:{% if acaoArray.endereco is defined %}
+                                                                {%for enderecoArray in acaoArray.endereco%}
+                                                                    <br>{{enderecoArray.endereco}}
+                                                                {%endfor%}
+                                                            {%else%}
+                                                                <br>Local não definido
+                                                                {%endif%}</p>
+
+                                                                    <p><b>Hora:</b><br>{{acaoArray.acao.hora}}</p>
+
+                                                                    <p><b>Doações:</b>{%if acaoArray.categoriasChecked is defined%}
+                                                                        {%for categorias in acaoArray.categoriasChecked%}<br>{{categorias}} {%endfor%}
+                                                                        {%else%}
+                                                                            <br>Doações não definidas
+                                                                            {%endif%}</p>
+
+                                                                            {%if acaoArray.acao.descricao is not empty%}
+                                                                                <p><b>Detalhes:</b><br>{{acaoArray.acao.descricao}}  </p>
+
+
+                                                                            {%endif%}
+
+                                                                            <a href="{{web_dir}}acao/{{key}}" class="editarAcao">
+                                                                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                                                                    <i class="material-icons iconEditarAcao">edit</i>
+                                                                                </button>
+                                                                            </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <i class="material-icons [ js-collapser ] iconClose">close</i>
+                                                    </div>
+                                                </div>
+                                                {%endfor%}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card__expander">
-                                        <div class="newCard">
-                                            <div class="card-info">
-                                                <div class="name">
-                                                    <p>Nome Acao</p>  <!-- Nome da ação -->
-                                                </div>
-                                                <hr>
-                                                <div class="content">
-                                                  <p><b>Grupo:</b><br>Grupo A</p>
-
-                                                  <p><b>Local:</b>
-                                                      <br>Local não definido
-                                                  </p>
-
-                                                  <p><b>Hora:</b><br>13:00</p>
-
-                                                  <p><b>Doações:</b>
-                                                    <br>Doações não definidas
-                                                  </p>
-
-                                                  <p><b>Detalhes:</b><br>Descricao</p>
-                                                  <a href="#" class="editarAcao">
-                                                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-                                                      <i class="material-icons iconEditarAcao">edit</i>
-                                                    </button>
-                                                  </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class="material-icons [ js-collapser ] iconClose">close</i>
-                            </div>
-                        </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </main>
-    </body>
-</html>
+                                </main>
+                        </body>
+                    </html>
 
                     <script>
                         var $cell = $('.card');
