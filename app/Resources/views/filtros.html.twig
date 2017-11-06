@@ -14,63 +14,76 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
-      <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-          <div class="mdl-card__supporting-text">
-              <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text">Filtros</h2>
+      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+          <header class="mdl-layout__header">
+              <div class="mdl-layout__header-row">
+                  <span class="mdl-layout-title">Amigos da Rua</span>
               </div>
-              <form action="#">
-                    <div class="panel-body">
-                        <ul class="input-list">
-                          <li>
-                            <div class="pure-radiobutton">
-                                <input id="H" name="radio" type="radio" value="Hoje">
-                                <label for="H">Hoje</label>
+          </header>
+
+          <main class="mdl-layout__content colunaCentro">
+              <div class="page-content">
+                  <div class="mdl-grid" >
+                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__supporting-text">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Filtros</h2>
                             </div>
-                          </li>
-                          <li>
-                            <div class="pure-radiobutton">
-                                <input id="S" name="radio" type="radio" value="ProximaSemana">
-                                <label for="S">Próxima Semana</label>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="pure-radiobutton">
-                                <input id="I" name="radio" type="radio" value="Intervalo">
-                                <label for="I">Escolher intervalo</label>
-                            </div>
-                          </li>
-                        </ul>
-                        <div id="datas">
-                          <div id="dtInicial"><i class="material-icons">today</i>
-                            <label>Data Inicial</label>
-                            <div class="mdl-textfield mdl-js-textfield" id="inputDtInicial">
-                                <input class="mdl-textfield__input" type="date" id="pickerDtInicio">
-                            </div>
-                          </div>
-                          <div id="dtFinal">
-                            <i class="material-icons">event</i>
-                            <label> Data Final</label>
-                            <div class="mdl-textfield mdl-js-textfield" id="inputDtFinal">
-                                <input class="mdl-textfield__input" type="date" id="pickerDtFim">
-                            </div>
-                          </div>
+                            <form action="#">
+                                  <div class="panel-body">
+                                      <ul class="input-list">
+                                        <li>
+                                          <div class="pure-radiobutton">
+                                              <input id="H" name="radio" type="radio" value="Hoje">
+                                              <label for="H">Hoje</label>
+                                          </div>
+                                        </li>
+                                        <li>
+                                          <div class="pure-radiobutton">
+                                              <input id="S" name="radio" type="radio" value="ProximaSemana">
+                                              <label for="S">Próxima Semana</label>
+                                          </div>
+                                        </li>
+                                        <li>
+                                          <div class="pure-radiobutton">
+                                              <input id="I" name="radio" type="radio" value="Intervalo">
+                                              <label for="I">Escolher intervalo</label>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                      <div id="datas">
+                                        <div id="dtInicial"><i class="material-icons">today</i>
+                                          <label>Data Inicial</label>
+                                          <div class="mdl-textfield mdl-js-textfield" id="inputDtInicial">
+                                              <input class="mdl-textfield__input" type="date" id="pickerDtInicio">
+                                          </div>
+                                        </div>
+                                        <div id="dtFinal">
+                                          <i class="material-icons">event</i>
+                                          <label> Data Final</label>
+                                          <div class="mdl-textfield mdl-js-textfield" id="inputDtFinal">
+                                              <input class="mdl-textfield__input" type="date" id="pickerDtFim">
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                            </form>
+                        </div>
+
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick="aplicarFiltro('{{web_dir}}')">
+                                Aplicar
+                            </a>
                         </div>
                     </div>
-              </form>
-          </div>
-
-          <div class="mdl-card__actions mdl-card--border">
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick="aplicarFiltro('{{web_dir}}')">
-                  Aplicar
-              </a>
-          </div>
-      </div>
+                </div>
+              </div>
+            </main>
     </body>
 </html>
   <script src="{{files_dir}}assets/js/Filtro.js"></script>
 <script>
-    
+
 $(document).ready(function() {
   $('input[type=radio][value=Intervalo]').change(function() {
       $("#datas").show();
