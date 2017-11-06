@@ -61,3 +61,14 @@ html, body{
     margin-left: -10px;
   }
 }
+#backHome{
+  color: white;
+  text-decoration: none;
+}
+#logout{
+  top: 15px;
+  right: 10%;
+  position: absolute;
+  float: right;
+  color: white;
+}

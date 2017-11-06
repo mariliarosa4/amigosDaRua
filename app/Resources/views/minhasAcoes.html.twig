@@ -12,8 +12,6 @@
         <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/home.css">
         <!--<link rel="stylesheet" type="text/css" href="../../../web/assets/css/home.css"> -->
 
-
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     </head>
@@ -22,6 +20,7 @@
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
+                  <a href="{{web_dir}}home" id="backHome"> <i class="material-icons">arrow_back</i></a>
                     <span class="mdl-layout-title">Amigos da Rua</span>
                 </div>
             </header>
@@ -35,9 +34,9 @@
                                 {%if  acoes is empty%}
                                     <h3> Não há ações para exibir</h3>
                                 {%endif%}
-                              
+
                                 {%for key,acaoArray in acoes%}
-                                   
+
                                     <div class=" card [ is-collapsed ] ">
                                         <div class="mdl-card mdl-shadow--2dp">
                                             <div class="mdl-card__supporting-text">
