@@ -4,3 +4,6 @@ app:
 home:
     path:     /home
     defaults: { _controller: 'TelaPrincipal::home' }
+admin:
+    path:     /admin
+    defaults: { _controller: 'CadastroGrupos::admin' }
