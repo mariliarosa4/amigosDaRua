@@ -51,3 +51,59 @@ function salvarEdicaoPerfil(caminho) {
     return false;
 }
 
+
+function atualizarSenha(caminho) {
+
+    var senha = $('#senha').val();
+    var novaSenha = $('#novaSenha').val();
+    var confirmarSenha = $('#confirmarSenha').val();
+
+
+
+    if (senha != "" && novaSenha != "" && confirmarSenha != "") {
+        if (novaSenha == confirmarSenha) {
+            var hashSenha = $.sha256(senha);
+            var hashNovaSenha = $.sha256(novaSenha);
+            var hashConfirmarSenha = $.sha256(confirmarSenha);
+            console.log(hashSenha);
+            var dataString = {
+                S: hashSenha,
+                NS: hashNovaSenha,
+                CS: hashConfirmarSenha
+            };
+
+            console.log(JSON.stringify(dataString));
+            $.ajax({
+                type: 'post',
+                data: JSON.stringify(dataString),
+                contentType: 'application/json',
+                dataType: 'json',
+                url: '' + caminho + 'alterarSenha',
+                cache: false,
+                processData: false,
+                async: false,
+                success: function (response) {
+                    console.log(response);
+                    if (response.sucesso) {
+                        alert("Senha alterada com sucesso!");
+                    }
+                    if (response.senhaAtualIncorreta) {
+                        alert("Senha atual incorreta! Tente novamente.");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
+
+                }
+
+            });
+        } else {
+            alert("Senhas não conferem!");
+        }
+    } else {
+        alert("Todos os campos de senhas devem ser preenchidos!");
+
+    }
+    return false;
+
+}

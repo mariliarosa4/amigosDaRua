@@ -86,7 +86,7 @@ class LoginController extends Controller {
 
     public function autenticacao($email, $senha) {
 
-        // $senha = hash('sha256', $senha);
+         $senha = hash('sha256', $senha);
         $usuarioAutenticado = $this->getDoctrine()
                 ->getRepository('AppBundle:Usuarios')
                 ->findBy(array('emailusuario' => $email, 'senhausuario' => $senha));
