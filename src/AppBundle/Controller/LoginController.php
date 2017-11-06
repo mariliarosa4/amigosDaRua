@@ -77,7 +77,7 @@ class LoginController extends Controller {
                 } else {
                     
                     $this->get('session')->set('admin', $this->get('session')->get('idUser'));
-                    return $this->redirectToRoute('admin');
+                    return $this->redirectToRoute('home');
                 }
             } else {
                 return $this->render('login.html.twig', array(

@@ -1,12 +1,13 @@
 .menuBottom{
   width: 100%;
   position: fixed;
+  z-index: 100;
   bottom: 10px;
 }
 .menuBottom *{
   margin: auto;
 }
-i{
+.menuBottom i{
   color: white;
 }
 .menuBottom {

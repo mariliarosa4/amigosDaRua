@@ -1,37 +1,53 @@
 <head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-amber.min.css" />
-  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-amber.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="../../../web/assets/css/menuBottom.css">
+    <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/menuBottom.css">
 </head>
-  <body>
+<body>
     <div class="menuBottom">
-      <a href="#">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="perfil">
-          <i class="material-icons">settings</i>
-        </button>
-      </a>
+    
+        {%if app.session.get('admin') is not empty%}
 
-      <a href="#">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="add">
-          <i class="material-icons">add</i>
-        </button>
-      </a>
+            <a href="{{web_dir}}logout">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="perfil">
+                    <i class="material-icons">power_settings_new</i>
+                </button>
+            </a>
 
-      <a href="#">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="filters">
-          <i class="material-icons">filter_list</i>
-        </button>
-      </a>
+            <a href="{{web_dir}}admin">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="add">
+                    <i class="material-icons">add</i>
+                </button>
+            </a>
 
-      <a href="#">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="minhasAcoes">
-          <i class="material-icons">person</i>
-        </button>
-      </a>
+        {%else%}
+            <a href="{{web_dir}}perfil">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="perfil">
+                    <i class="material-icons">settings</i>
+                </button>
+            </a>
+
+            <a href="{{web_dir}}cadastrarAcao">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="add">
+                    <i class="material-icons">add</i>
+                </button>
+            </a>
+            <a href="{{web_dir}}filtro">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="filters">
+                    <i class="material-icons">filter_list</i>
+                </button>
+            </a>
+
+            <a href="{{web_dir}}minhasAcoes">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="minhasAcoes">
+                    <i class="material-icons">person</i>
+                </button>
+            </a>
+        {%endif%}
     </div>
 </body>
