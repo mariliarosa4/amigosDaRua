@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Home</title>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-amber.min.css" />
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- <link rel="stylesheet" type="text/css" href="{{files_dir}}assets/css/home.css"> -->
+        <link rel="stylesheet" type="text/css" href="../../../web/assets/css/home.css">
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">Amigos da Rua</span>
+                </div>
+            </header>
+
+            <main class="mdl-layout__content colunaCentro">
+                <div class="page-content">
+                    <div class="mdl-grid" >
+                        <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
+
+                            <div class="cards">
+                                <div class=" card [ is-collapsed ] ">
+                                    <div class="mdl-card mdl-shadow--2dp">
+                                        <div class="mdl-card__supporting-text">
+                                            <div class="card__inner [ js-expander ]">
+                                                <div><span>Grupo A</span></div>
+                                                <br>
+                                                <div class="divDtHr"><i class="material-icons">date_range</i><span>22/05/17</span></div>
+                                                <div class="divDtHr"><i class="material-icons">schedule</i><span>13:00</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card__expander">
+                                        <div class="newCard">
+                                            <div class="card-info">
+                                                <div class="name">
+                                                    <p>Nome Acao</p>  <!-- Nome da ação -->
+                                                </div>
+                                                <hr>
+                                                <div class="content">
+                                                  <p><b>Grupo:</b><br>Grupo A</p>
+
+                                                  <p><b>Local:</b>
+                                                      <br>Local não definido
+                                                  </p>
+
+                                                  <p><b>Hora:</b><br>13:00</p>
+
+                                                  <p><b>Doações:</b>
+                                                    <br>Doações não definidas
+                                                  </p>
+
+                                                  <p><b>Detalhes:</b><br>Descricao</p>
+                                                  <a href="#" class="editarAcao">
+                                                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                                      <i class="material-icons iconEditarAcao">edit</i>
+                                                    </button>
+                                                  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="material-icons [ js-collapser ] iconClose">close</i>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+    </body>
+</html>
+
+                    <script>
+                        var $cell = $('.card');
+
+                        //open and close card when clicked on card
+                        $cell.find('.js-expander').click(function () {
+
+                            var $thisCell = $(this).closest('.card');
+
+                            if ($thisCell.hasClass('is-collapsed')) {
+                                $cell.not($thisCell).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
+                                $thisCell.removeClass('is-collapsed').addClass('is-expanded');
+
+                                if ($cell.not($thisCell).hasClass('is-inactive')) {
+                                    //do nothing
+                                } else {
+                                    $cell.not($thisCell).addClass('is-inactive');
+                                }
+
+                            } else {
+                                $thisCell.removeClass('is-expanded').addClass('is-collapsed');
+                                $cell.not($thisCell).removeClass('is-inactive');
+                            }
+                        });
+
+                        //close card when click on cross
+                        $cell.find('.js-collapser').click(function () {
+
+                            var $thisCell = $(this).closest('.card');
+
+                            $thisCell.removeClass('is-expanded').addClass('is-collapsed');
+                            $cell.not($thisCell).removeClass('is-inactive');
+
+                        });
+                    </script>

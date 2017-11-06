@@ -139,6 +139,8 @@
   .card__expander {
     width: calc(300% + 60px);
   }
+
+
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .card:nth-of-type(2n+2) .card__expander {
@@ -180,6 +182,7 @@ body {
   display: block;
   position: relative;
   padding: 20px;
+  width: 300px;
 }
 
 .newCard .card-info .name {
@@ -201,4 +204,21 @@ body {
 .divDtHr span{
   float: left;
   margin-top: 10px;
+}
+
+.editarAcao{
+  text-decoration: none;
+  color: white;
+  float: right;
+}
+.material-icons.iconEditarAcao{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  cursor: pointer;
+}
+.material-icons.iconClose{
+  position: relative;
+  top: -210px;
+  left: -50px;
 }
