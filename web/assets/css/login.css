@@ -36,6 +36,9 @@ html, body{
 #submitButton{
   margin-top: 30px;
 }
+#novaSenha{
+    margin-top: 30px;
+}
 .esqueciSenha{
   text-decoration: none;
   color: gray;

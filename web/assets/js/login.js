@@ -7,10 +7,12 @@
 
 function esquecerSenha(caminho) {
 
+ 
     var email = $('#email').val();
     var dataString = {
         email: email
     };
+    
     console.log(JSON.stringify(dataString));
     $.ajax({
         type: 'post',
@@ -24,12 +26,12 @@ function esquecerSenha(caminho) {
         success: function (response) {
             console.log(response);
             if (response.sucesso) {
-                mensagemSistema("Sucesso!", "Email enviado com sucesso!");
-                // alert("Email enviado com sucesso!");//melhorar a forma de exibir esse aviso
+                // mensagemSistema("Sucesso!", "Email enviado com sucesso!");
+               alert("Email enviado com sucesso!");//melhorar a forma de exibir esse aviso
             }
             if (response.emailNaoCadastrado) {
-                // alert("Email incorreto!");//melhorar a forma de exibir esse aviso
-                mensagemSistema("Erro", "Email incorreto!");
+                 alert("Email incorreto!");//melhorar a forma de exibir esse aviso
+                //mensagemSistema("Erro", "Email incorreto!");
             }
 
 
@@ -42,6 +44,7 @@ function esquecerSenha(caminho) {
     return false;
 }
 function primeiroacesso(caminho) {
+ 
     var email = $('#emailPrimeiro').val().trim();
     var codigo = $('#codigo').val().trim();
     var dataString = {
@@ -60,10 +63,12 @@ function primeiroacesso(caminho) {
         async: false,
         success: function (response) {
             console.log(response);
+            
+            $('#submitButton').hide();
+      
             if (response.sucesso) {
                 alert('Primeiro acesso realizado com sucesso! Clique em cadastrar senha.');
-                document.getElementById("novaSenha").style.display="block";
-                document.getElementById("novaSenha").style.visibility="visible";
+                $('#novaSenha').toggle();
             }
 
         },
@@ -72,7 +77,7 @@ function primeiroacesso(caminho) {
         }
 
     });
-
+return false;
 }
 
 function novaSenha(caminho, email) {
@@ -97,15 +102,17 @@ function novaSenha(caminho, email) {
             async: false,
             success: function (response) {
                 console.log(response);
+                 alert("Senha atualizada com sucesso! Va para a pagina de login.");
                 //melhorar a forma de exibir esse aviso
-                doument.getElementById("botaoMensagemSistema").onclick = window.location.href = caminho + 'login';
-                mensagemSistema("Sucesso!", "Senha atualizada com sucesso! Va para a pagina de login.");
-
+//                document.getElementById("botaoMensagemSistema").onclick =
+                        window.location.href = caminho + 'login';
+               // mensagemSistema("Sucesso!", "Senha atualizada com sucesso! Va para a pagina de login.");
+              
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
-                // alert("Falha na atualização da senha.");//melhorar a forma de exibir esse aviso
-                mensagemSistema("Erro", "Falha na atualização da senha.");
+                 alert("Falha na atualização da senha.");//melhorar a forma de exibir esse aviso
+             //   mensagemSistema("Erro", "Falha na atualização da senha.");
             }
 
         });

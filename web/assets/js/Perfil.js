@@ -15,11 +15,11 @@ function salvarEdicaoPerfil(caminho) {
     if (nomeResponsavel != "" && telefoneResponsavel != "" && dataNascimentoResponsavel != "" && nomeGrupo != "") {
 
         var dataString = {
-            nomeResponsavel: nomeResponsavel,
-            telefoneResponsavel: telefoneResponsavel,
-            dataNascimentoResponsavel: dataNascimentoResponsavel,
-            integrantesGrupo: integrantesGrupo,
-            nomeGrupo: nomeGrupo
+            "nomeResponsavel": nomeResponsavel,
+            "telefoneResponsavel": telefoneResponsavel,
+            "dataNascimentoResponsavel": dataNascimentoResponsavel,
+            "integrantesGrupo": integrantesGrupo,
+            "nomeGrupo": nomeGrupo
         };
 
         console.log(JSON.stringify(dataString));
@@ -67,9 +67,9 @@ function atualizarSenha(caminho) {
             var hashConfirmarSenha = $.sha256(confirmarSenha);
             console.log(hashSenha);
             var dataString = {
-                S: hashSenha,
-                NS: hashNovaSenha,
-                CS: hashConfirmarSenha
+                "S": hashSenha,
+                "NS": hashNovaSenha,
+                "CS": hashConfirmarSenha
             };
 
             console.log(JSON.stringify(dataString));
